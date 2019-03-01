@@ -25,12 +25,11 @@
             <artifactId>Discord4J</artifactId>
             <version>be2318c</version>
         </dependency>
-        <!-- Allows you to log events from Discord4J
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
-        </dependency> -->
+        </dependency>
     </dependencies>
 
 </project>

@@ -14,7 +14,7 @@ public class Main {
     public static final String CMD_PREFIX = "!";
 
     private static final String PLAYING_TEXT = "Type " + CMD_PREFIX + "help for command list";
-    private static final String TOKEN = "NTUwODc0NjQxMjc5NzQ2MDQ4.D1rWnA.PvycXxV684ZlaZo68j2wg2krFVo";
+    private static final String TOKEN = System.getProperty("botToken");
 
     public static void main(String[] args) {
         client = buildClient(TOKEN);
