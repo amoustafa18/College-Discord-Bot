@@ -6,7 +6,7 @@ import sx.blah.discord.api.events.EventDispatcher;
 import sx.blah.discord.util.DiscordException;
 
 public class Main {
-
+    
     public static IDiscordClient client;
     public static final String COMMAND_LIST = "src/main/resources/commands.txt";
     public static final String CMD_PREFIX = "!";
