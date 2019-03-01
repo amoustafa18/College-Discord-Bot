@@ -1,0 +1,19 @@
+package camiscollegecorner;
+
+import sx.blah.discord.api.events.IListener;
+import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
+import sx.blah.discord.handle.obj.IMessage;
+
+public class MessageListener implements IListener<MessageReceivedEvent> {
+
+    public void handle(MessageReceivedEvent messageEvent) {
+        if(messageEvent.getMessage().getContent().startsWith(Main.CMD_PREFIX)) {
+            handleCommand(messageEvent.getMessage());
+        }
+    }
+
+    public void handleCommand(IMessage message) {
+        CmdHandler handler = new CmdHandler(message);
+        handler.execute();
+    }
+}
