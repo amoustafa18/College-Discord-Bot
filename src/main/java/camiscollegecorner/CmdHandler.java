@@ -12,6 +12,7 @@ public class CmdHandler {
 
     private static final String CMD_HELP = "help";
     private static final String ERROR_LIST = "There was an error loading the commands list. Please try again later.";
+    private static final String CMD_PING = "ping";
 
     public CmdHandler(IMessage message) {
         this.message = message;
@@ -25,10 +26,12 @@ public class CmdHandler {
 
         if(content.startsWith(CMD_HELP)) {
             handleHelp(content);
+        } else if(content.equals(CMD_PING)) {
+            handlePing(content);
         }
     }
 
-    public void handleHelp(String content) {
+    private void handleHelp(String content) {
         File commandList = null;
         BufferedReader br = null;
 
@@ -50,5 +53,9 @@ public class CmdHandler {
         }
 
         message.getAuthor().getOrCreatePMChannel().sendMessage(response);
+    }
+
+    private void handlePing(String content) {
+        message.getChannel().sendMessage("pong");
     }
 }

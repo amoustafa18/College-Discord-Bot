@@ -7,7 +7,10 @@ import sx.blah.discord.handle.obj.IMessage;
 public class MessageListener implements IListener<MessageReceivedEvent> {
 
     public void handle(MessageReceivedEvent messageEvent) {
-        if(messageEvent.getMessage().getContent().startsWith(Main.CMD_PREFIX)) {
+        String channelName = messageEvent.getChannel().getName();
+        boolean shouldHandleMessage = !Main.DEBUG_MODE || channelName.equals("bot-team");
+
+        if(shouldHandleMessage && messageEvent.getMessage().getContent().startsWith(Main.CMD_PREFIX)) {
             handleCommand(messageEvent.getMessage());
         }
     }
