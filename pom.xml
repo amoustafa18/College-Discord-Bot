@@ -8,18 +8,29 @@
     <artifactId>College-Discord-Bot</artifactId>
     <version>1.0</version>
 
+    <repositories>
+        <repository> <!-- This repo fixes issues with transitive dependencies -->
+            <id>jcenter</id>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>com.github.austinv11</groupId>
             <artifactId>Discord4J</artifactId>
-            <version>2.9.3</version>
+            <version>be2318c</version>
         </dependency>
-        <!-- Allows you to log events from Discord4J -->
+        <!-- Allows you to log events from Discord4J
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
-        </dependency>
+        </dependency> -->
     </dependencies>
 
 </project>
