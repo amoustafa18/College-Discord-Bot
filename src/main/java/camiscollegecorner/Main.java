@@ -12,7 +12,7 @@ public class Main {
     public static final String CMD_PREFIX = "!";
 
     private static final String PLAYING_TEXT = "Type !help for command list";
-    private static final String TOKEN = "NTUwODc0NjQxMjc5NzQ2MDQ4.D1oyng.8TAp6A3OVD9nbbZy3QpLn3-PPZQ";
+    private static final String TOKEN = "NTUwODc0NjQxMjc5NzQ2MDQ4.D1pDBw.lfCdrpiXl75D8bTL_n4JXJBekNk";
 
     public static void main(String[] args) {
         client = buildClient(TOKEN);
