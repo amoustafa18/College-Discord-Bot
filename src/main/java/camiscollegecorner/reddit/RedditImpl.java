@@ -5,7 +5,10 @@ public class RedditImpl implements RedditGrabber{
     private String testing = "this is an implement tes ";
 
 
+
+
+
     public String randomImage(String[] subreddit) {
-        return null;
+        return "randomImage currently unimplemented";
     }
 }

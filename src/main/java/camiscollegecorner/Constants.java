@@ -34,5 +34,5 @@ public abstract class Constants {
 
 	public static final String[] SUBREDDITS = new String[]{"Blep", "CatGifts", "Catloaf", "catpictures", "catsareliquid",
 			"CatsBeingCats", "CatsInBusinessAttire", "CatsInSinks", "catssittingdown", "jellybeantoes",
-			"StretchyKitties", "TheCatTrapIsWorking", "toebeans"};
+			"StretchyKitties", "TheCatTrapIsWorking", "toebeans", "catsonglass"};
 }
