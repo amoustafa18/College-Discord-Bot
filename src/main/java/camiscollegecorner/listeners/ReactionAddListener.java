@@ -1,21 +1,17 @@
-package camiscollegecorner;
+package camiscollegecorner.listeners;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import camiscollegecorner.Constants;
 import sx.blah.discord.api.events.IListener;
-import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.guild.channel.message.reaction.ReactionAddEvent;
-import sx.blah.discord.handle.impl.obj.Guild;
-import sx.blah.discord.handle.impl.obj.ReactionEmoji;
-import sx.blah.discord.handle.impl.obj.Role;
 import sx.blah.discord.handle.obj.IGuild;
-import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.handle.obj.IRole;
 import sx.blah.discord.handle.obj.IUser;
-import sx.blah.discord.util.RoleBuilder;
 
 import java.util.List;
 
+/** This class listens for reactions being added to messages. */
 public class ReactionAddListener implements IListener<ReactionAddEvent> {
+
 	@Override
 	public void handle(ReactionAddEvent reactionAddEvent) {
 		if(reactionAddEvent.getMessageID() == Constants.READ_RULES_MESSAGE_ID) {
@@ -39,19 +35,20 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 			/*
 				We are dealing with the "choose your roles" message
 
-				A user can only have one of:
-				HS Freshman
-				HS Sophomore
-				HS Junior
-				HS Senior
-				Undergrad
+				Rules:
+					A user can only have one of:
+						HS Freshman
+						HS Sophomore
+						HS Junior
+						HS Senior
+						Undergrad
 
-				A use can have either to all of these as they please:
-				they/them/theirs
-				she/her/hers
-				he/him/his
-				Transfer
-				International
+					A use can have either to all of these as they please:
+						they/them/theirs
+						she/her/hers
+						he/him/his
+						Transfer
+						International
 			 */
 
 			long reactionId = reactionAddEvent.getReaction().getEmoji().getLongID();
@@ -119,6 +116,13 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 		}
 	}
 
+	/**
+	 * Checks whether or not a user has at least one of the following roles: HS freshman, HS sophomore, HS junior, HS
+	 * senior, undergrad.
+	 * @param user The user that is being checked
+	 * @param guild The guild these roles are on
+	 * @return Whether or not the user has one of these roles
+	 */
 	private boolean hasGradeRole(IUser user, IGuild guild) {
 		IRole freshmanRole = guild.getRoleByID(Constants.FRESHMAN_ROLE_ID);
 		IRole sophomoreRole = guild.getRoleByID(Constants.SOPHOMORE_ROLE_ID);
@@ -127,10 +131,5 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 
 		return user.hasRole(freshmanRole) || user.hasRole(sophomoreRole) ||
 				user.hasRole(juniorRole) || user.hasRole(seniorRole);
-	}
-
-	public void handleCommand(IMessage message) {
-		CmdHandler handler = new CmdHandler(message);
-		handler.start();
 	}
 }

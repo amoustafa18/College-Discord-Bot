@@ -3,6 +3,8 @@ package camiscollegecorner;
 import sx.blah.discord.handle.impl.obj.ReactionEmoji;
 
 public abstract class Constants {
+	public static final boolean DEBUG_MODE = false; //when true, the bot will ONLY be responsive in #bot-team channel
+
 	public static final ReactionEmoji OK_EMOJI = ReactionEmoji.of("\u1F197");
 	public static final ReactionEmoji CHICKEN_EGG_EMOJI = ReactionEmoji.of("\u1F95A");
 	public static final ReactionEmoji HATCHING_EMOJI = ReactionEmoji.of("\u1F423");
@@ -33,5 +35,9 @@ public abstract class Constants {
 	public static final long NSFW_ROLE_ID = 550381039697133588l;
 
 	public static final long CUTE_PICS_CHANNEL_ID = 550351556676026368l;
+
+	public static final String COMMAND_LIST = "src/main/resources/commands.txt";
+	public static final String CMD_PREFIX = "!";
+	public static final String PLAYING_TEXT = "Type " + CMD_PREFIX + "help for commands";
 }
 

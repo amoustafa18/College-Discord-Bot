@@ -1,11 +1,13 @@
-package camiscollegecorner;
+package camiscollegecorner.listeners;
 
+import camiscollegecorner.Constants;
 import sx.blah.discord.api.events.IListener;
 import sx.blah.discord.handle.impl.events.guild.channel.message.reaction.ReactionRemoveEvent;
 import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.handle.obj.IRole;
 import sx.blah.discord.handle.obj.IUser;
 
+/** This class listens for reactions being deleted from messages. */
 public class ReactionDeleteListener implements IListener<ReactionRemoveEvent> {
 
 	@Override
