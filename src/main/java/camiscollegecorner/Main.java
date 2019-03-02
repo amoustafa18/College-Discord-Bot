@@ -14,7 +14,7 @@ public class Main {
     public static IDiscordClient client;
     public static final String COMMAND_LIST = "src/main/resources/commands.txt";
     public static final String CMD_PREFIX = "!";
-    public static final boolean DEBUG_MODE = true; //when true, the bot will ONLY be responsive in #bot-team channel
+    public static final boolean DEBUG_MODE = false; //when true, the bot will ONLY be responsive in #bot-team channel
 
     private static final String PLAYING_TEXT = "Type " + CMD_PREFIX + "help for command list";
     private static final String TOKEN = System.getProperty("botToken");

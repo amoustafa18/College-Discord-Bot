@@ -69,6 +69,10 @@ public class CmdHandler extends Thread {
     }
 
     private void handleCat(String content) {
+        if(message.getChannel().getLongID() != Constants.CUTE_PICS_CHANNEL_ID) {
+            return;
+        }
+
         String imageLink = redditGrabber.randomImage();
 
         message.getChannel().sendMessage(imageLink);
