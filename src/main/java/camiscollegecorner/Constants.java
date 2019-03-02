@@ -17,6 +17,9 @@ public abstract class Constants {
 	public static final ReactionEmoji EVERGREEN_EMOJI = ReactionEmoji.of("\u1F332");
 	public static final ReactionEmoji AIRPLANE_EMOJI = ReactionEmoji.of("\u2708");
 	public static final ReactionEmoji WARNING_EMOJI = ReactionEmoji.of("\u26A0");
+	public static final ReactionEmoji STAR_EMOJI = ReactionEmoji.of("\u2B50");
+
+	public static final int PIN_STAR_REACT_COUNT = 5;
 
 	public static final long READ_RULES_MESSAGE_ID = 551168954714947605l;
 	public static final long CHOOSE_ROLES_MESSAGE_ID = 551182441092481025l;
@@ -35,9 +38,10 @@ public abstract class Constants {
 	public static final long NSFW_ROLE_ID = 550381039697133588l;
 
 	public static final long CUTE_PICS_CHANNEL_ID = 550351556676026368l;
+	public static final long GENERAL_CHANNEL_ID = 550348648001699840l;
+	public static final long NSFW_GENERAL_CHANNEL_ID = 550348672613744641l;
 
 	public static final String COMMAND_LIST = "src/main/resources/commands.txt";
 	public static final String CMD_PREFIX = "!";
 	public static final String PLAYING_TEXT = "Type " + CMD_PREFIX + "help for commands";
 }
-

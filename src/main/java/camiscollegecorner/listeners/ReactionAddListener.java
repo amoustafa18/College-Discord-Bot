@@ -4,6 +4,7 @@ import camiscollegecorner.Constants;
 import sx.blah.discord.api.events.IListener;
 import sx.blah.discord.handle.impl.events.guild.channel.message.reaction.ReactionAddEvent;
 import sx.blah.discord.handle.obj.IGuild;
+import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.handle.obj.IRole;
 import sx.blah.discord.handle.obj.IUser;
 
@@ -14,6 +15,8 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 
 	@Override
 	public void handle(ReactionAddEvent reactionAddEvent) {
+		long sourceChannelId = reactionAddEvent.getChannel().getLongID();
+
 		if(reactionAddEvent.getMessageID() == Constants.READ_RULES_MESSAGE_ID) {
 			//we are dealing with the "react with squared OK to agree with rules" message
 			if(Constants.OK_EMOJI.getLongID() == reactionAddEvent.getReaction().getEmoji().getLongID()) {
@@ -113,6 +116,14 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 
 				reactor.addRole(nsfw);
 			}
+		} else if(reactionAddEvent.getReaction().getEmoji().getLongID() == Constants.STAR_EMOJI.getLongID() &&
+				sourceChannelId == Constants.GENERAL_CHANNEL_ID || sourceChannelId == Constants.NSFW_GENERAL_CHANNEL_ID) {
+			//pin message if it gets certain number of star reacts
+			if(reactionAddEvent.getReaction().getUsers().size() >= Constants.PIN_STAR_REACT_COUNT) {
+				IMessage sourceMessage = reactionAddEvent.getMessage();
+				reactionAddEvent.getChannel().pin(sourceMessage);
+			}
+
 		}
 	}
 
