@@ -33,7 +33,7 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 				}
 
 				//TODO only for debug purposes
-				reactionAddEvent.getChannel().sendMessage("Reaction detected by " + reactorsString);
+				//reactionAddEvent.getChannel().sendMessage("Reaction detected by " + reactorsString);
 			}
 		} else if(reactionAddEvent.getMessageID() == Constants.CHOOSE_ROLES_MESSAGE_ID) {
 			/*
