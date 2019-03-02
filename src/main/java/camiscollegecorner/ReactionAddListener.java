@@ -85,22 +85,36 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 				}
 			} else if(reactionId == Constants.WHITE_CIRCLE_EMOJI.getLongID()) {
 				//they
-				reactor.addRole(sourceGuild.getRoleByID(Constants.THEY_ROLE_ID));
+				IRole they = sourceGuild.getRoleByID(Constants.THEY_ROLE_ID);
+
+				if(!reactor.hasRole(they)) {
+					reactor.addRole(sourceGuild.getRoleByID(Constants.THEY_ROLE_ID));
+				}
 			} else if(reactionId == Constants.BLUE_CIRCLE_EMOJI.getLongID()) {
 				//he
-				reactor.addRole(sourceGuild.getRoleByID(Constants.HE_ROLE_ID));
+				IRole he = sourceGuild.getRoleByID(Constants.HE_ROLE_ID);
+
+				reactor.addRole(he);
 			} else if(reactionId == Constants.RED_CIRCLE_EMOJI.getLongID()) {
 				//she
-				reactor.addRole(sourceGuild.getRoleByID(Constants.SHE_ROLE_ID));
+				IRole she = sourceGuild.getRoleByID(Constants.SHE_ROLE_ID);
+
+				reactor.addRole(she);
 			} else if(reactionId == Constants.EVERGREEN_EMOJI.getLongID()) {
 				//transfer
-				reactor.addRole(sourceGuild.getRoleByID(Constants.TRANSFER_ROLE_ID));
+				IRole transfer = sourceGuild.getRoleByID(Constants.TRANSFER_ROLE_ID);
+
+				reactor.addRole(transfer);
 			} else if(reactionId == Constants.AIRPLANE_EMOJI.getLongID()) {
 				//international
-				reactor.addRole(sourceGuild.getRoleByID(Constants.INTERNATIONAL_ROLE_ID));
+				IRole international = sourceGuild.getRoleByID(Constants.INTERNATIONAL_ROLE_ID);
+
+				reactor.addRole(international);
 			} else if(reactionId == Constants.WARNING_EMOJI.getLongID()) {
 				//not so safe
-				reactor.addRole(sourceGuild.getRoleByID(Constants.NSFW_ROLE_ID));
+				IRole nsfw = sourceGuild.getRoleByID(Constants.NSFW_ROLE_ID);
+
+				reactor.addRole(nsfw);
 			}
 		}
 	}
