@@ -46,12 +46,7 @@ public class ReactionListener implements IListener<ReactionAddEvent> {
 
 	@Override
 	public void handle(ReactionAddEvent reactionAddEvent) {
-		System.out.println("Reaction detected");
-		//System.out.println(reactionAddEvent.getMessageID());
-		System.out.println(READ_RULES_MESSAGE_ID);
-
 		if(reactionAddEvent.getMessageID() == READ_RULES_MESSAGE_ID) {
-			System.out.println("Is the right message");
 			//we are dealing with the "react with squared OK to agree with rules" message
 			if(OK_EMOJI.getLongID() == reactionAddEvent.getReaction().getEmoji().getLongID()) {
 				List<IUser> reactors = reactionAddEvent.getReaction().getUsers();
