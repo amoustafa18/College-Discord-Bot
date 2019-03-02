@@ -10,7 +10,7 @@ import sx.blah.discord.util.DiscordException;
 import java.util.Random;
 
 public class Main {
-    //test
+
     public static IDiscordClient client;
     public static final String COMMAND_LIST = "src/main/resources/commands.txt";
     public static final String CMD_PREFIX = "!";
