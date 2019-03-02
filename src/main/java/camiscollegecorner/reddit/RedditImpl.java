@@ -5,20 +5,14 @@ import net.dean.jraw.http.OkHttpNetworkAdapter;
 import net.dean.jraw.http.UserAgent;
 import net.dean.jraw.models.*;
 import net.dean.jraw.RedditClient;
-import net.dean.jraw.models.EmbeddedMedia.OEmbed;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 import net.dean.jraw.pagination.DefaultPaginator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class RedditImpl implements RedditGrabber {
-
-    private String testing = "this is an implement test ";
-    private Random random = new Random();
-
     private UserAgent userAgent = new UserAgent("bot", "camiscollegecorner.reddit",
             "v0.1", "collegecorner");
     private Credentials credentials = Credentials.script(System.getProperty("redditUser"),
@@ -28,27 +22,28 @@ public class RedditImpl implements RedditGrabber {
 
     private RedditClient reddit = OAuthHelper.automatic(adapter, credentials);
 
+    private static List<Submission> submissionsList = new ArrayList<>();
+
     public String randomImage() {
-//        List<String> images = new ArrayList<String>();
-//        for (Submission s : subreddit.next())
-//            if (!s.isSelfPost() && s.getUrl().contains("i.imgur.com")) {
-//                images.add(s.getUrl());
-//            }
-//        return (images.get(0));
+        if(submissionsList.size() > 0) {
+            Submission s = submissionsList.get(0);
+
+            if((s.getUrl().contains("imgur.com") || s.getUrl().contains("i.redd.it"))  && !s.isSelfPost()) {
+                submissionsList.remove(0);
+                return s.getUrl();
+            } else {
+                submissionsList.remove(0);
+                return randomImage();
+            }
+        }
 
         DefaultPaginator<Submission> frontPage = reddit.frontPage()
-                .sorting(SubredditSort.TOP)
+                .sorting(SubredditSort.NEW)
                 .timePeriod(TimePeriod.DAY)
-                .limit(10)
+                .limit(100)
                 .build();
 
-        Listing<Submission> submissions = frontPage.next();
-        int randomNumber = random.nextInt(submissions.size());
-        Submission s = submissions.get(randomNumber);
-
-        if((s.getUrl().contains("i.imgur.com") || s.getUrl().contains("i.redd.it"))  && !s.isSelfPost()) {
-            return s.getUrl();
-        }
+        submissionsList = frontPage.next();
 
         return randomImage();
     }
