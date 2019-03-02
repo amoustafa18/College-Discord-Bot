@@ -4,12 +4,9 @@ import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventDispatcher;
 import sx.blah.discord.handle.obj.ActivityType;
-import sx.blah.discord.handle.obj.IUser;
 import sx.blah.discord.handle.obj.StatusType;
 import sx.blah.discord.util.DiscordException;
-import sx.blah.discord.util.Image;
 
-import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -29,7 +26,7 @@ public class Main {
 
         EventDispatcher dispatcher = client.getDispatcher();
         dispatcher.registerListener(new MessageListener());
-        dispatcher.registerListener(new ReactionListener());
+        dispatcher.registerListener(new ReactionAddListener());
 
         //wait until client is ready, then change its presence
         while(!(client.isLoggedIn() && client.isReady())) {
