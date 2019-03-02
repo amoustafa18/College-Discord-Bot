@@ -6,7 +6,7 @@ import sx.blah.discord.handle.obj.IMessage;
 
 import java.io.*;
 
-public class CmdHandler {
+public class CmdHandler extends Thread {
 
     private IMessage message;
 
@@ -24,7 +24,8 @@ public class CmdHandler {
         this.redditGrabber = new RedditImpl();
     }
 
-    public void execute() {
+    @Override
+    public void run() {
         String content = message.getContent().toLowerCase();
 
         //remove the command prefix:
@@ -68,7 +69,7 @@ public class CmdHandler {
     }
 
     private void handleCat(String content) {
-        String imageLink = redditGrabber.randomImage(Constants.SUBREDDITS);
+        String imageLink = redditGrabber.randomImage();
 
         message.getChannel().sendMessage(imageLink);
     }

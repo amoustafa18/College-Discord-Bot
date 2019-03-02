@@ -18,6 +18,6 @@ public class MessageListener implements IListener<MessageReceivedEvent> {
 
     public void handleCommand(IMessage message) {
         CmdHandler handler = new CmdHandler(message);
-        handler.execute();
+        handler.start();
     }
 }

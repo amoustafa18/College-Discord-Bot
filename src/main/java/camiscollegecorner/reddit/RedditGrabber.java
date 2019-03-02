@@ -11,5 +11,5 @@ public interface RedditGrabber {
 	 * @param subreddit The subreddit to pull a trending image from
 	 * @return The direct link to the image file
 	 */
-	String randomImage(DefaultPaginator<Submission> subreddit);
+	String randomImage();
 }

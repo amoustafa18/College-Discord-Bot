@@ -131,6 +131,6 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 
 	public void handleCommand(IMessage message) {
 		CmdHandler handler = new CmdHandler(message);
-		handler.execute();
+		handler.start();
 	}
 }
