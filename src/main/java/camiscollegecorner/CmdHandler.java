@@ -1,5 +1,7 @@
 package camiscollegecorner;
 
+import camiscollegecorner.reddit.RedditGrabber;
+import camiscollegecorner.reddit.RedditImpl;
 import sx.blah.discord.handle.obj.IMessage;
 
 import java.io.*;
@@ -13,9 +15,13 @@ public class CmdHandler {
     private static final String CMD_HELP = "help";
     private static final String ERROR_LIST = "There was an error loading the commands list. Please try again later.";
     private static final String CMD_PING = "ping";
+    private static final String CMD_CAT = "cat";
+
+    private RedditGrabber redditGrabber;
 
     public CmdHandler(IMessage message) {
         this.message = message;
+        this.redditGrabber = new RedditImpl();
     }
 
     public void execute() {
@@ -28,6 +34,8 @@ public class CmdHandler {
             handleHelp(content);
         } else if(content.equals(CMD_PING)) {
             handlePing(content);
+        } else if(content.equals(CMD_CAT)) {
+            handleCat(content);
         }
     }
 
@@ -57,5 +65,11 @@ public class CmdHandler {
 
     private void handlePing(String content) {
         message.getChannel().sendMessage("pong");
+    }
+
+    private void handleCat(String content) {
+        String imageLink = redditGrabber.randomImage(Constants.SUBREDDITS);
+
+        message.getChannel().sendMessage(imageLink);
     }
 }

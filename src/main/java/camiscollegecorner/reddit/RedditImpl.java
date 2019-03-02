@@ -1,6 +1,7 @@
 package camiscollegecorner.reddit;
 
 import net.dean.jraw.http.NetworkAdapter;
+import net.dean.jraw.http.OkHttpNetworkAdapter;
 import net.dean.jraw.http.UserAgent;
 import net.dean.jraw.models.Subreddit;
 import net.dean.jraw.RedditClient;
@@ -17,7 +18,9 @@ public class RedditImpl implements RedditGrabber {
     Credentials credentials = Credentials.script("collegecorner", "wearethebotteam",
                 "t9Nlv_epKQ8xNg", "hr7RFyJs5fZg-1IOE81gdEZ5fx4");
 
-    RedditClient reddit = OAuthHelper.automatic
+    NetworkAdapter adapter = new OkHttpNetworkAdapter(userAgent);
+
+    RedditClient reddit = OAuthHelper.automatic(adapter, credentials);
 
     public String randomImage(String[] subreddit) {
         return "randomImage currently unimplemented";
