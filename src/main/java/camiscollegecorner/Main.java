@@ -4,8 +4,13 @@ import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventDispatcher;
 import sx.blah.discord.handle.obj.ActivityType;
+import sx.blah.discord.handle.obj.IUser;
 import sx.blah.discord.handle.obj.StatusType;
 import sx.blah.discord.util.DiscordException;
+import sx.blah.discord.util.Image;
+
+import java.util.List;
+import java.util.Random;
 
 public class Main {
     
@@ -17,17 +22,21 @@ public class Main {
     private static final String PLAYING_TEXT = "Type " + CMD_PREFIX + "help for command list";
     private static final String TOKEN = System.getProperty("botToken");
 
-    public static void main(String[] args) {
+    private static Random rand = new Random();
+
+    public static void main(String[] args) throws Exception {
         client = buildClient(TOKEN);
 
         EventDispatcher dispatcher = client.getDispatcher();
         dispatcher.registerListener(new MessageListener());
+        dispatcher.registerListener(new ReactionListener());
 
         //wait until client is ready, then change its presence
         while(!(client.isLoggedIn() && client.isReady())) {
             //do nothing
         }
 
+        //change presence
         client.changePresence(StatusType.ONLINE, ActivityType.PLAYING, PLAYING_TEXT);
     }
 
