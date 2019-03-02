@@ -40,6 +40,8 @@ public abstract class Constants {
 	public static final long CUTE_PICS_CHANNEL_ID = 550351556676026368l;
 	public static final long GENERAL_CHANNEL_ID = 550348648001699840l;
 	public static final long NSFW_GENERAL_CHANNEL_ID = 550348672613744641l;
+	public static final long VIDEOS_AND_MEMES_CHANNEL_ID = 550348902352814090l;
+	public static final long NSFW_MEMES_CHANNEL_ID = 550545157498470403l;
 
 	public static final String COMMAND_LIST = "src/main/resources/commands.txt";
 	public static final String CMD_PREFIX = "!";

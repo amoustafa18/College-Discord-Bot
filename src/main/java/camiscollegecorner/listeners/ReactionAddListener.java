@@ -117,7 +117,8 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 				reactor.addRole(nsfw);
 			}
 		} else if(reactionAddEvent.getReaction().getEmoji().getLongID() == Constants.STAR_EMOJI.getLongID() &&
-				sourceChannelId == Constants.GENERAL_CHANNEL_ID || sourceChannelId == Constants.NSFW_GENERAL_CHANNEL_ID) {
+				sourceChannelId == Constants.GENERAL_CHANNEL_ID || sourceChannelId == Constants.NSFW_GENERAL_CHANNEL_ID ||
+				sourceChannelId == Constants.VIDEOS_AND_MEMES_CHANNEL_ID || sourceChannelId == Constants.NSFW_MEMES_CHANNEL_ID) {
 			//pin message if it gets certain number of star reacts
 			if(reactionAddEvent.getReaction().getUsers().size() >= Constants.PIN_STAR_REACT_COUNT) {
 				IMessage sourceMessage = reactionAddEvent.getMessage();
