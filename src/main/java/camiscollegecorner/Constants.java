@@ -31,4 +31,8 @@ public abstract class Constants {
 	public static final long TRANSFER_ROLE_ID = 550377261044334592l;
 	public static final long INTERNATIONAL_ROLE_ID = 551066986784751626l;
 	public static final long NSFW_ROLE_ID = 550381039697133588l;
+
+	public static final String[] SUBREDDITS = new String[]{"Blep", "CatGifts", "Catloaf", "catpictures", "catsareliquid",
+			"CatsBeingCats", "CatsInBusinessAttire", "CatsInSinks", "catssittingdown", "jellybeantoes",
+			"StretchyKitties", "TheCatTrapIsWorking", "toebeans"};
 }
