@@ -75,6 +75,17 @@ public class ReactionDeleteListener implements IListener<ReactionRemoveEvent> {
 
 				reactor.removeRole(nsfwRole);
 			}
+			else if(reactionId == Constants.CHICKEN_EMOJI.getLongID()){
+				//alum
+				IRole alum = sourceGuild.getRoleByID(Constants.ALUM_ROLE_ID);
+
+				reactor.removeRole(alum);
+			}else if(reactionId == Constants.HEART_DECORATION_EMOJI.getLongID()){
+				//gap year
+				IRole gap = sourceGuild.getRoleByID(Constants.GAP_YEAR_ROLE_ID);
+
+				reactor.removeRole(gap);
+			}
 		}
 	}
 }

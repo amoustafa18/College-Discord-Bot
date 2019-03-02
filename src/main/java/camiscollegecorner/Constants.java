@@ -18,11 +18,14 @@ public abstract class Constants {
 	public static final ReactionEmoji AIRPLANE_EMOJI = ReactionEmoji.of("\u2708");
 	public static final ReactionEmoji WARNING_EMOJI = ReactionEmoji.of("\u26A0");
 	public static final ReactionEmoji STAR_EMOJI = ReactionEmoji.of("\u2B50");
+	public static final ReactionEmoji CHICKEN_EMOJI = ReactionEmoji.of("\u1F49F");
+	public static final ReactionEmoji HEART_DECORATION_EMOJI = ReactionEmoji.of("\u1F49F");
 
 	public static final int PIN_STAR_REACT_COUNT = 5;
 
 	public static final long READ_RULES_MESSAGE_ID = 551168954714947605l;
 	public static final long CHOOSE_ROLES_MESSAGE_ID = 551182441092481025l;
+
 
 	public static final long VISIBLE_ROLE_ID = 551171218485805083l;
 	public static final long FRESHMAN_ROLE_ID = 550353511699841034l;
@@ -36,6 +39,8 @@ public abstract class Constants {
 	public static final long TRANSFER_ROLE_ID = 550377261044334592l;
 	public static final long INTERNATIONAL_ROLE_ID = 551066986784751626l;
 	public static final long NSFW_ROLE_ID = 550381039697133588l;
+	public static final long ALUM_ROLE_ID = 551513639593705492l;
+	public static final long GAP_YEAR_ROLE_ID = 551446158912782346l;
 
 	public static final long CUTE_PICS_CHANNEL_ID = 550351556676026368l;
 	public static final long GENERAL_CHANNEL_ID = 550348648001699840l;

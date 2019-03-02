@@ -115,7 +115,19 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 				IRole nsfw = sourceGuild.getRoleByID(Constants.NSFW_ROLE_ID);
 
 				reactor.addRole(nsfw);
+			}else if(reactionId == Constants.CHICKEN_EMOJI.getLongID()){
+				//alum
+				IRole alum = sourceGuild.getRoleByID(Constants.ALUM_ROLE_ID);
+
+				reactor.addRole(alum);
+			}else if(reactionId == Constants.HEART_DECORATION_EMOJI.getLongID()){
+				//gap year
+				IRole gap = sourceGuild.getRoleByID(Constants.GAP_YEAR_ROLE_ID);
+
+				reactor.addRole(gap);
 			}
+
+
 		} else if(reactionAddEvent.getReaction().getEmoji().getLongID() == Constants.STAR_EMOJI.getLongID() &&
 				sourceChannelId == Constants.GENERAL_CHANNEL_ID || sourceChannelId == Constants.NSFW_GENERAL_CHANNEL_ID ||
 				sourceChannelId == Constants.VIDEOS_AND_MEMES_CHANNEL_ID || sourceChannelId == Constants.NSFW_MEMES_CHANNEL_ID) {
