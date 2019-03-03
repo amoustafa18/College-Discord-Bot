@@ -3,10 +3,8 @@ package camiscollegecorner.commandhandlers;
 import camiscollegecorner.Constants;
 import sx.blah.discord.handle.obj.IMessage;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 
 /** This class handles the help command. */
 public class HelpHandler extends AbstractHandler {
@@ -21,23 +19,24 @@ public class HelpHandler extends AbstractHandler {
 	public void run() {
 		File commandList = null;
 		BufferedReader br = null;
+		InputStream is = this.getClass().getClassLoader().getResourceAsStream("/resources/commands.txt");
+		System.out.println(is);
+
+		//Scanner s = new Scanner(is);
 
 		String response = "";
 
-		try {
-			commandList = new File(Constants.COMMAND_LIST);
+			//commandList = new File(getClass().getResourceAsStream(Constants.COMMAND_LIST));
 
-			br = new BufferedReader(new FileReader(commandList));
+			//br = new BufferedReader(new FileReader(commandList));
+
+			//br = new BufferedReader(is);
 
 			String line = "";
 
-			while((line = br.readLine()) != null) {
-				response += line + "\n";
-			}
-
-		} catch(IOException ex) {
-			getMessage().getChannel().sendMessage(ERROR_LIST);
-		}
+//			while((line = s.nextLine()) != null) {
+//				response += line + "\n";
+//			}
 
 		getMessage().getAuthor().getOrCreatePMChannel().sendMessage(response);
 	}

@@ -27,6 +27,7 @@ public class CatHandler extends AbstractHandler {
 		Submission catPostSubmission = CatImageGrabber.getInstance().randomCatImage();
 		String imageLink = catPostSubmission.getUrl();
 
+		//discord doesn't allow gifs to be embedded, so ensure the pic is not a gif
 		while(imageLink.endsWith(".gifv") || imageLink.endsWith(".gif")) {
 			catPostSubmission = CatImageGrabber.getInstance().randomCatImage();
 			imageLink = catPostSubmission.getUrl();
