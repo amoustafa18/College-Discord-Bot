@@ -8,8 +8,7 @@ public interface RedditImageGrabber {
 	/**
 	 * Pulls a random image from the specified Reddit client's front page.
 	 *
-	 * @param client The client to pull a trending image from
 	 * @return The submission object representing the image post on Reddit
 	 */
-	Submission randomImageFromFontPage(RedditClient client);
+	Submission randomImageFromFontPage();
 }

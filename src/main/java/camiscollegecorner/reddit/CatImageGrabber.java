@@ -8,7 +8,7 @@ import net.dean.jraw.models.Submission;
 import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 
-/** A class that uses a RedditImageGrabber to pull trending cat images from cat subreddits. */
+/** A singleton class that uses a RedditImageGrabber to pull trending cat images from cat subreddits. */
 public class CatImageGrabber implements HasRedditClient {
 	private UserAgent userAgent = new UserAgent("bot", "camiscollegecorner.client",
 			"v0.1", "collegecorner");
@@ -17,7 +17,13 @@ public class CatImageGrabber implements HasRedditClient {
 	private NetworkAdapter adapter = new OkHttpNetworkAdapter(userAgent);
 	private RedditClient client = OAuthHelper.automatic(adapter, credentials);
 
-	private RedditImageGrabber grabber = new RedditImageImpl();
+	private RedditImageImpl grabber = new RedditImageImpl(client);
+
+	private static CatImageGrabber instance = new CatImageGrabber();
+
+	private CatImageGrabber() {
+
+	}
 
 	@Override
 	public RedditClient getClient() {
@@ -25,10 +31,21 @@ public class CatImageGrabber implements HasRedditClient {
 	}
 
 	/**
+	 * Caches cat images in memory for speed efficiency.
+	 */
+	public void cache() {
+		grabber.cache();
+	}
+
+	/**
 	 * Grabs an image of a cat from Reddit
 	 * @return The Submission object representing the cat post on Reddit
 	 */
 	public Submission randomCatImage() {
-		return grabber.randomImageFromFontPage(client);
+		return grabber.randomImageFromFontPage();
+	}
+
+	public static CatImageGrabber getInstance() {
+		return instance;
 	}
 }

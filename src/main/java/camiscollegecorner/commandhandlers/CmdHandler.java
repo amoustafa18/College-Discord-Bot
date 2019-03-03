@@ -20,7 +20,7 @@ public class CmdHandler {
 
     public CmdHandler(IMessage message) {
         this.message = message;
-        this.catImageGrabber = new CatImageGrabber();
+        this.catImageGrabber = CatImageGrabber.getInstance();
     }
 
     /**

@@ -11,8 +11,6 @@ import java.security.SecureRandom;
 /** This class handles the cat command. */
 public class CatHandler extends AbstractHandler {
 
-	private static CatImageGrabber catImageGrabber = new CatImageGrabber();
-
 	/** For generating random hexadecimal color codes. */
 	private static SecureRandom random = new SecureRandom();
 
@@ -26,7 +24,7 @@ public class CatHandler extends AbstractHandler {
 			return;
 		}
 
-		Submission catPostSubmission = catImageGrabber.randomCatImage();
+		Submission catPostSubmission = CatImageGrabber.getInstance().randomCatImage();
 		String imageLink = catPostSubmission.getUrl();
 
 		//imgur posts are usually not direct links. Get direct link from URL
