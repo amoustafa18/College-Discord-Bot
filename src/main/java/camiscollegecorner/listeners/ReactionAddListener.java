@@ -21,7 +21,7 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 			//we are dealing with the "react with squared OK to agree with rules" message
 			if(Constants.OK_EMOJI.getName().equals(reactionAddEvent.getReaction().getEmoji().getName())) {
 				List<IUser> reactors = reactionAddEvent.getReaction().getUsers();
-				IRole visibleRole = reactionAddEvent.getGuild().getRoleByID(Constants.VISIBLE_ROLE_ID);
+				IRole visibleRole = reactionAddEvent.getGuild().getRoleByID(Constants.MEMBER_ROLE_ID);
 
 				String reactorsString = "";
 				for(IUser user : reactors) {
@@ -63,31 +63,26 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.FRESHMAN_ROLE_ID));
-					reactor.removeRole(sourceGuild.getRoleByID(Constants.VISIBLE_ROLE_ID));
 				}
 			} else if(reactionName.equals(Constants.HATCHING_EMOJI.getName())) {
 				//sophomore
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.SOPHOMORE_ROLE_ID));
-					reactor.removeRole(sourceGuild.getRoleByID(Constants.VISIBLE_ROLE_ID));
 				}
 			} else if(reactionName.equals(Constants.HATCHED_EMOJI.getName())) {
 				//junior
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.JUNIOR_ROLE_ID));
-					reactor.removeRole(sourceGuild.getRoleByID(Constants.VISIBLE_ROLE_ID));
 				}
 			} else if(reactionName.equals(Constants.BABY_CHICK_EMOJI.getName())) {
 				//senior
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.SENIOR_ROLE_ID));
-					reactor.removeRole(sourceGuild.getRoleByID(Constants.VISIBLE_ROLE_ID));
 				}
 			} else if(reactionName.equals(Constants.BIRD_EMOJI.getName())) {
 				//undergrad
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.UNDERGRAD_ROLE_ID));
-					reactor.removeRole(sourceGuild.getRoleByID(Constants.VISIBLE_ROLE_ID));
 				}
 			} else if(reactionName.equals(Constants.WHITE_CIRCLE_EMOJI.getName())) {
 				//they
