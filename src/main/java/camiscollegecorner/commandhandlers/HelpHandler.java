@@ -4,6 +4,7 @@ import camiscollegecorner.Constants;
 import sx.blah.discord.handle.obj.IMessage;
 
 import java.io.*;
+import java.util.Properties;
 import java.util.Scanner;
 
 /** This class handles the help command. */
@@ -19,24 +20,23 @@ public class HelpHandler extends AbstractHandler {
 	public void run() {
 		File commandList = null;
 		BufferedReader br = null;
-		InputStream is = this.getClass().getClassLoader().getResourceAsStream("/resources/commands.txt");
+		InputStream is = this.getClass().getClassLoader().getResourceAsStream(Constants.COMMAND_LIST);
 		System.out.println(is);
 
-		//Scanner s = new Scanner(is);
+
+		Properties config = new Properties();
+		File file = new File(Constants.COMMAND_LIST);
+		if(file.exists()){
+			try(FileInputStream in = new FileInputStream(file)){
+				config.load(in);
+				System.out.println("it works");
+			}catch(IOException e){
+				e.printStackTrace();
+				System.out.println("\nThere was an error reading the config file...");
+			}
+		}
 
 		String response = "";
-
-			//commandList = new File(getClass().getResourceAsStream(Constants.COMMAND_LIST));
-
-			//br = new BufferedReader(new FileReader(commandList));
-
-			//br = new BufferedReader(is);
-
-			String line = "";
-
-//			while((line = s.nextLine()) != null) {
-//				response += line + "\n";
-//			}
 
 		getMessage().getAuthor().getOrCreatePMChannel().sendMessage(response);
 	}
