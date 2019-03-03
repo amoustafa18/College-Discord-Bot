@@ -17,7 +17,7 @@ public abstract class Constants {
 	public static final ReactionEmoji EVERGREEN_EMOJI = ReactionEmoji.of("\uD83C\uDF32");
 	public static final ReactionEmoji AIRPLANE_EMOJI = ReactionEmoji.of("✈");
 	public static final ReactionEmoji WARNING_EMOJI = ReactionEmoji.of("⚠");
-	public static final ReactionEmoji STAR_EMOJI = ReactionEmoji.of("⭐");
+	public static final ReactionEmoji STAR_EMOJI = ReactionEmoji.of("⭐⭐");
 	public static final ReactionEmoji CHICKEN_EMOJI = ReactionEmoji.of("\uD83D\uDC14");
 	public static final ReactionEmoji HEART_DECORATION_EMOJI = ReactionEmoji.of("\uD83D\uDC9F");
 

@@ -141,11 +141,11 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 			}
 
 
-		} else if(reactionAddEvent.getReaction().getEmoji().getLongID() == Constants.STAR_EMOJI.getLongID() &&
+		} else if(reactionAddEvent.getReaction().getEmoji().getName().equals(Constants.STAR_EMOJI.getName()) &&
 				sourceChannelId == Constants.GENERAL_CHANNEL_ID || sourceChannelId == Constants.NSFW_GENERAL_CHANNEL_ID ||
 				sourceChannelId == Constants.VIDEOS_AND_MEMES_CHANNEL_ID || sourceChannelId == Constants.NSFW_MEMES_CHANNEL_ID) {
 			//pin message if it gets certain number of star reacts
-			if(reactionAddEvent.getReaction().getUsers().size() >= Constants.PIN_STAR_REACT_COUNT) {
+			if(reactionAddEvent.getReaction().getUsers().size() == Constants.PIN_STAR_REACT_COUNT) {
 				IMessage sourceMessage = reactionAddEvent.getMessage();
 				reactionAddEvent.getChannel().pin(sourceMessage);
 			}
