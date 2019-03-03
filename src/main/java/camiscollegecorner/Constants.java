@@ -27,7 +27,7 @@ public abstract class Constants {
 	public static final long CHOOSE_ROLES_MESSAGE_ID = 551182441092481025l;
 
 
-	public static final long VISIBLE_ROLE_ID = 551171218485805083l;
+	public static final long VISIBLE_ROLE_ID = 551171218485805083l	;
 	public static final long FRESHMAN_ROLE_ID = 550353511699841034l;
 	public static final long SOPHOMORE_ROLE_ID = 550353490086723584l;
 	public static final long JUNIOR_ROLE_ID = 550353218337636414l;
