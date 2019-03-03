@@ -79,7 +79,7 @@ public class RedditImageImpl implements RedditImageGrabber {
                     cache();
                 }
             };
-            
+
             Thread thread = new Thread(r);
             thread.start();
         }

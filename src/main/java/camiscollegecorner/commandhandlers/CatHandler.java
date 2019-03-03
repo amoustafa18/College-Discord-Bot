@@ -27,9 +27,14 @@ public class CatHandler extends AbstractHandler {
 		Submission catPostSubmission = CatImageGrabber.getInstance().randomCatImage();
 		String imageLink = catPostSubmission.getUrl();
 
+		while(imageLink.endsWith(".gifv") || imageLink.endsWith(".gif")) {
+			catPostSubmission = CatImageGrabber.getInstance().randomCatImage();
+			imageLink = catPostSubmission.getUrl();
+		}
+
 		//imgur posts are usually not direct links. Get direct link from URL
 		if(imageLink.contains("imgur")) {
-			if(!(imageLink.endsWith("jpg") || imageLink.endsWith("png") || imageLink.endsWith("jpeg"))) {
+			if(!(imageLink.endsWith(".jpg") || imageLink.endsWith(".png") || imageLink.endsWith(".jpeg"))) {
 				//it is not a direct image link
 				imageLink += ".png";
 			}
