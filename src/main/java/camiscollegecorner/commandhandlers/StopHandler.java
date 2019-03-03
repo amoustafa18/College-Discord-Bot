@@ -22,9 +22,12 @@ public class StopHandler extends AbstractHandler {
             getMessage().getChannel().sendMessage("Shutting down");
             System.exit(0);
         }
-        else
-            getMessage().getChannel().sendMessage("You are not admin or on bot team" +
-                    ". Ask bot team or any admin. Please do not spam this command");
+
+        //people were complaing that it sends a message if you say !stop and cant have any of the role
+        //ill let someone else decide what to do
+//        else
+//            getMessage().getChannel().sendMessage("You are not admin or on bot team" +
+//                    ". Ask bot team or any admin. Please do not spam this command");
     }
 
 
