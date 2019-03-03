@@ -3,6 +3,7 @@ package camiscollegecorner.reddit;
 import net.dean.jraw.models.*;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.pagination.DefaultPaginator;
+import sx.blah.discord.Discord4J;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,20 +19,24 @@ public class RedditImageImpl implements RedditImageGrabber {
     /** The RedditClient used to pull images from. */
     private RedditClient client;
 
+    private DefaultPaginator<Submission> frontPage;
+
+    /** When the number of cached submissions drops below this number, a new reddit request will be dispatched. */
+    private static final int RESTOCK_THRESHOLD = 5;
+
     public RedditImageImpl(RedditClient client) {
         this.client = client;
+        this.frontPage = client.frontPage()
+                .sorting(SubredditSort.HOT)
+                .timePeriod(TimePeriod.DAY)
+                .limit(100)
+                .build();
     }
 
     /**
      * Caches submissions from the front page into {@code submissionList}
      */
     public void cache() {
-        DefaultPaginator<Submission> frontPage = client.frontPage()
-                .sorting(SubredditSort.NEW)
-                .timePeriod(TimePeriod.DAY)
-                .limit(100)
-                .build();
-
         List<Submission> cache = frontPage.next();
 
         submissionsList.addAll(cache);
@@ -47,21 +52,36 @@ public class RedditImageImpl implements RedditImageGrabber {
 
             if((s.getUrl().contains("imgur.com") || s.getUrl().contains("i.redd.it"))  && !s.isSelfPost()) {
                 submissionsList.remove(0);
+                checkRestock();
                 return s;
             } else {
                 submissionsList.remove(0);
+                checkRestock();
                 return randomImageFromFontPage();
             }
-        }
 
-        DefaultPaginator<Submission> frontPage = client.frontPage()
-                .sorting(SubredditSort.NEW)
-                .timePeriod(TimePeriod.DAY)
-                .limit(100)
-                .build();
+        }
 
         submissionsList = frontPage.next();
 
         return randomImageFromFontPage();
+    }
+
+    /**
+     * Restocks the cache if needed. The cache needs to be restocked if and only if the number of submission entries
+     * drops below {@code RESTOCK_THRESHOLD}. The request will be dispatched on another thread to avoid pauses.
+     */
+    private void checkRestock() {
+        if(submissionsList.size() < RESTOCK_THRESHOLD) {
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    cache();
+                }
+            };
+            
+            Thread thread = new Thread(r);
+            thread.start();
+        }
     }
 }
