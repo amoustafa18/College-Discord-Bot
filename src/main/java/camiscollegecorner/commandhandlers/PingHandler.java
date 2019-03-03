@@ -11,6 +11,6 @@ public class PingHandler extends AbstractHandler {
 
 	@Override
 	public void run() {
-		getMessage().getChannel().sendMessage("pong");
+		getMessage().getChannel().sendMessage("pong ");
 	}
 }

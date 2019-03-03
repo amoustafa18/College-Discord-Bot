@@ -63,6 +63,7 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.FRESHMAN_ROLE_ID));
 				}
+				System.out.println(reactionId == Constants.HATCHING_EMOJI.getLongID());
 			} else if(reactionId == Constants.HATCHING_EMOJI.getLongID()) {
 				//sophomore
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
@@ -90,12 +91,12 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 				if(!reactor.hasRole(they)) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.THEY_ROLE_ID));
 				}
-			} else if(reactionId == Constants.BLUE_CIRCLE_EMOJI.getLongID()) {
+			} else if(reactionId == Constants.RED_CIRCLE_EMOJI.getLongID()) {
 				//he
 				IRole he = sourceGuild.getRoleByID(Constants.HE_ROLE_ID);
 
 				reactor.addRole(he);
-			} else if(reactionId == Constants.RED_CIRCLE_EMOJI.getLongID()) {
+			} else if(reactionId == Constants.BLUE_CIRCLE_EMOJI.getLongID()) {
 				//she
 				IRole she = sourceGuild.getRoleByID(Constants.SHE_ROLE_ID);
 
