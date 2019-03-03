@@ -5,21 +5,21 @@ import sx.blah.discord.handle.impl.obj.ReactionEmoji;
 public abstract class Constants {
 	public static final boolean DEBUG_MODE = false; //when true, the bot will ONLY be responsive in #bot-team channel
 
-	public static final ReactionEmoji OK_EMOJI = ReactionEmoji.of("\u1F197");
-	public static final ReactionEmoji CHICKEN_EGG_EMOJI = ReactionEmoji.of("\u1F95A");
-	public static final ReactionEmoji HATCHING_EMOJI = ReactionEmoji.of("\u1F423");
-	public static final ReactionEmoji HATCHED_EMOJI = ReactionEmoji.of("\u1F425");
-	public static final ReactionEmoji BABY_CHICK_EMOJI = ReactionEmoji.of("\u1F424");
-	public static final ReactionEmoji BIRD_EMOJI = ReactionEmoji.of("\u1F426");
-	public static final ReactionEmoji WHITE_CIRCLE_EMOJI = ReactionEmoji.of("\u26AA");
-	public static final ReactionEmoji BLUE_CIRCLE_EMOJI = ReactionEmoji.of("\u1F535");
-	public static final ReactionEmoji RED_CIRCLE_EMOJI = ReactionEmoji.of("\u1F534");
-	public static final ReactionEmoji EVERGREEN_EMOJI = ReactionEmoji.of("\u1F332");
-	public static final ReactionEmoji AIRPLANE_EMOJI = ReactionEmoji.of("\u2708");
-	public static final ReactionEmoji WARNING_EMOJI = ReactionEmoji.of("\u26A0");
-	public static final ReactionEmoji STAR_EMOJI = ReactionEmoji.of("\u2B50");
-	public static final ReactionEmoji CHICKEN_EMOJI = ReactionEmoji.of("\u1F49F");
-	public static final ReactionEmoji HEART_DECORATION_EMOJI = ReactionEmoji.of("\u1F49F");
+	public static final ReactionEmoji OK_EMOJI = ReactionEmoji.of("\uD83C\uDD97");
+	public static final ReactionEmoji CHICKEN_EGG_EMOJI = ReactionEmoji.of("\uD83D\uDC23");
+	public static final ReactionEmoji HATCHING_EMOJI = ReactionEmoji.of("\uD83D\uDC23");
+	public static final ReactionEmoji HATCHED_EMOJI = ReactionEmoji.of("\uD83D\uDC25");
+	public static final ReactionEmoji BABY_CHICK_EMOJI = ReactionEmoji.of("\uD83D\uDC24");
+	public static final ReactionEmoji BIRD_EMOJI = ReactionEmoji.of("\uD83D\uDC26");
+	public static final ReactionEmoji WHITE_CIRCLE_EMOJI = ReactionEmoji.of("⚪");
+	public static final ReactionEmoji BLUE_CIRCLE_EMOJI = ReactionEmoji.of("\uD83D\uDD35");
+	public static final ReactionEmoji RED_CIRCLE_EMOJI = ReactionEmoji.of("\uD83D\uDD34");
+	public static final ReactionEmoji EVERGREEN_EMOJI = ReactionEmoji.of("\uD83C\uDF32");
+	public static final ReactionEmoji AIRPLANE_EMOJI = ReactionEmoji.of("✈");
+	public static final ReactionEmoji WARNING_EMOJI = ReactionEmoji.of("⚠");
+	public static final ReactionEmoji STAR_EMOJI = ReactionEmoji.of("⭐");
+	public static final ReactionEmoji CHICKEN_EMOJI = ReactionEmoji.of("\uD83D\uDC14");
+	public static final ReactionEmoji HEART_DECORATION_EMOJI = ReactionEmoji.of("\uD83D\uDC9F");
 
 	public static final int PIN_STAR_REACT_COUNT = 5;
 

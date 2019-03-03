@@ -19,7 +19,7 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 
 		if(reactionAddEvent.getMessageID() == Constants.READ_RULES_MESSAGE_ID) {
 			//we are dealing with the "react with squared OK to agree with rules" message
-			if(Constants.OK_EMOJI.getLongID() == reactionAddEvent.getReaction().getEmoji().getLongID()) {
+			if(Constants.OK_EMOJI.getName().equals(reactionAddEvent.getReaction().getEmoji().getName())) {
 				List<IUser> reactors = reactionAddEvent.getReaction().getUsers();
 				IRole visibleRole = reactionAddEvent.getGuild().getRoleByID(Constants.VISIBLE_ROLE_ID);
 
@@ -54,74 +54,73 @@ public class ReactionAddListener implements IListener<ReactionAddEvent> {
 						International
 			 */
 
-			long reactionId = reactionAddEvent.getReaction().getEmoji().getLongID();
+			String reactionName = reactionAddEvent.getReaction().getEmoji().getName();
 			IUser reactor = reactionAddEvent.getUser();
 			IGuild sourceGuild = reactionAddEvent.getGuild();
 
-			if(reactionId == Constants.CHICKEN_EGG_EMOJI.getLongID()) {
+			if(reactionName.equals(Constants.CHICKEN_EGG_EMOJI.getName())) {
 				//freshman
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.FRESHMAN_ROLE_ID));
 				}
-				System.out.println(reactionId == Constants.HATCHING_EMOJI.getLongID());
-			} else if(reactionId == Constants.HATCHING_EMOJI.getLongID()) {
+			} else if(reactionName.equals(Constants.HATCHING_EMOJI.getName())) {
 				//sophomore
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.SOPHOMORE_ROLE_ID));
 				}
-			} else if(reactionId == Constants.HATCHED_EMOJI.getLongID()) {
+			} else if(reactionName.equals(Constants.HATCHED_EMOJI.getName())) {
 				//junior
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.JUNIOR_ROLE_ID));
 				}
-			} else if(reactionId == Constants.BABY_CHICK_EMOJI.getLongID()) {
+			} else if(reactionName.equals(Constants.BABY_CHICK_EMOJI.getName())) {
 				//senior
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.SENIOR_ROLE_ID));
 				}
-			} else if(reactionId == Constants.BIRD_EMOJI.getLongID()) {
+			} else if(reactionName.equals(Constants.BIRD_EMOJI.getName())) {
 				//undergrad
 				if(!hasGradeRole(reactor, reactionAddEvent.getGuild())) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.UNDERGRAD_ROLE_ID));
 				}
-			} else if(reactionId == Constants.WHITE_CIRCLE_EMOJI.getLongID()) {
+			} else if(reactionName.equals(Constants.WHITE_CIRCLE_EMOJI.getName())) {
 				//they
 				IRole they = sourceGuild.getRoleByID(Constants.THEY_ROLE_ID);
 
 				if(!reactor.hasRole(they)) {
 					reactor.addRole(sourceGuild.getRoleByID(Constants.THEY_ROLE_ID));
 				}
-			} else if(reactionId == Constants.RED_CIRCLE_EMOJI.getLongID()) {
+			} else if(reactionName.equals(Constants.RED_CIRCLE_EMOJI.getName())) {
 				//he
 				IRole he = sourceGuild.getRoleByID(Constants.HE_ROLE_ID);
 
 				reactor.addRole(he);
-			} else if(reactionId == Constants.BLUE_CIRCLE_EMOJI.getLongID()) {
+			} else if(reactionName.equals(Constants.BLUE_CIRCLE_EMOJI.getName())) {
 				//she
 				IRole she = sourceGuild.getRoleByID(Constants.SHE_ROLE_ID);
 
 				reactor.addRole(she);
-			} else if(reactionId == Constants.EVERGREEN_EMOJI.getLongID()) {
+			} else if(reactionName.equals(Constants.EVERGREEN_EMOJI.getName())) {
 				//transfer
 				IRole transfer = sourceGuild.getRoleByID(Constants.TRANSFER_ROLE_ID);
 
 				reactor.addRole(transfer);
-			} else if(reactionId == Constants.AIRPLANE_EMOJI.getLongID()) {
+			} else if(reactionName.equals(Constants.AIRPLANE_EMOJI.getName())) {
 				//international
 				IRole international = sourceGuild.getRoleByID(Constants.INTERNATIONAL_ROLE_ID);
 
 				reactor.addRole(international);
-			} else if(reactionId == Constants.WARNING_EMOJI.getLongID()) {
+			} else if(reactionName.equals(Constants.WARNING_EMOJI.getName())) {
 				//not so safe
 				IRole nsfw = sourceGuild.getRoleByID(Constants.NSFW_ROLE_ID);
 
 				reactor.addRole(nsfw);
-			}else if(reactionId == Constants.CHICKEN_EMOJI.getLongID()){
+			}else if(reactionName.equals(Constants.CHICKEN_EMOJI.getName())) {
 				//alum
 				IRole alum = sourceGuild.getRoleByID(Constants.ALUM_ROLE_ID);
 
 				reactor.addRole(alum);
-			}else if(reactionId == Constants.HEART_DECORATION_EMOJI.getLongID()){
+			}else if(reactionName.equals(Constants.HEART_DECORATION_EMOJI.getName())) {
 				//gap year
 				IRole gap = sourceGuild.getRoleByID(Constants.GAP_YEAR_ROLE_ID);
 
