@@ -21,7 +21,7 @@ public abstract class Constants {
 	public static final ReactionEmoji CHICKEN_EMOJI = ReactionEmoji.of("\uD83D\uDC14");
 	public static final ReactionEmoji HEART_DECORATION_EMOJI = ReactionEmoji.of("\uD83D\uDC9F");
 
-	public static final int PIN_STAR_REACT_COUNT = 5;
+	public static final int PIN_STAR_REACT_COUNT = 7;
 
 	public static final long READ_RULES_MESSAGE_ID = 551168954714947605l;
 	public static final long CHOOSE_ROLES_MESSAGE_ID = 551182441092481025l;
