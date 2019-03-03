@@ -41,6 +41,9 @@ public abstract class Constants {
 	public static final long NSFW_ROLE_ID = 550381039697133588l;
 	public static final long ALUM_ROLE_ID = 551513639593705492l;
 	public static final long GAP_YEAR_ROLE_ID = 551446158912782346l;
+	public static final long ADMIN_ROLE_ID = 550353118664196106l;
+	public static final long BOT_TEAM_ROLE_ID = 551168467538018315l;
+
 
 	public static final long CUTE_PICS_CHANNEL_ID = 550351556676026368l;
 	public static final long GENERAL_CHANNEL_ID = 550348648001699840l;
@@ -50,6 +53,7 @@ public abstract class Constants {
 
 	public static final long WAFFLE_USER_ID = 180854214308790272l;
 	public static final long STANA_USER_ID = 163998218965876737l;
+	public static final long CAMI_USER_ID = 215333525795110913l;
 
 	public static final String COMMAND_LIST = "/main/resources/commands.txt";
 	public static final String CMD_PREFIX = "!";
