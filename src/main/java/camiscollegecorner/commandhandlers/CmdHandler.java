@@ -15,12 +15,13 @@ public class CmdHandler {
     private static final String CMD_HELP = "help";
     private static final String CMD_PING = "ping";
     private static final String CMD_CAT = "cat";
-
+    private static final String CMD_STOP = "stop";
     private CatImageGrabber catImageGrabber;
 
     public CmdHandler(IMessage message) {
         this.message = message;
         this.catImageGrabber = CatImageGrabber.getInstance();
+
     }
 
     /**
@@ -28,7 +29,6 @@ public class CmdHandler {
      */
     public void handle() {
         String content = message.getContent().toLowerCase();
-
         //remove the command prefix:
         content = content.substring(Constants.CMD_PREFIX.length());
 
@@ -42,6 +42,10 @@ public class CmdHandler {
         } else if(content.equals(CMD_CAT)) {
             CatHandler h = new CatHandler(message);
             h.start();
+        }else if(content.equals(CMD_STOP)){
+           StopHandler h = new StopHandler(message);
+           h.start();
         }
+
     }
 }

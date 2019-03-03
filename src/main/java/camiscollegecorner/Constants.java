@@ -48,6 +48,9 @@ public abstract class Constants {
 	public static final long VIDEOS_AND_MEMES_CHANNEL_ID = 550348902352814090l;
 	public static final long NSFW_MEMES_CHANNEL_ID = 550545157498470403l;
 
+	public static final long WAFFLE_USER_ID = 180854214308790272l;
+	public static final long STANA_USER_ID = 163998218965876737l;
+
 	public static final String COMMAND_LIST = "/main/resources/commands.txt";
 	public static final String CMD_PREFIX = "!";
 	public static final String PLAYING_TEXT = "Type " + CMD_PREFIX + "help for commands";
