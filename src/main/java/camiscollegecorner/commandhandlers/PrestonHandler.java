@@ -1,6 +1,7 @@
 package camiscollegecorner.commandhandlers;
 
 import camiscollegecorner.Constants;
+import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.obj.IMessage;
 
 import java.io.File;
@@ -18,7 +19,7 @@ public class PrestonHandler extends AbstractHandler {
 
         InputStream is = this.getClass().getClassLoader().getResourceAsStream(Constants.PRESTON_LIST);
         System.out.println(is);
-
+        Random random = new Random();
         String line = "";
         String response = "";
 
@@ -38,20 +39,31 @@ public class PrestonHandler extends AbstractHandler {
 
 
                //ranndom preston picture
-                Random random = new Random();
+
                 int val = random.nextInt(count);
                 for(int i = 0; i <= val; i++)
                     line = scanner.nextLine();
 
                 response = line;
 
+
+
             } catch (Exception e) {
                 e.printStackTrace();
                 System.err.println("\nUnable to load preston");
             }
         }
+        EmbedObject.ImageObject image = new EmbedObject.ImageObject();
+        image.url = response;
 
-        getMessage().getChannel().sendMessage(response);
+        EmbedObject embed = new EmbedObject();
+        embed.image = image;
+        int color = random.nextInt(1000000);
+        embed.color = color;
+        embed.type = "image";
+        embed.description = "Preston!";
+
+        getMessage().getChannel().sendMessage(embed);
     }
 
 
