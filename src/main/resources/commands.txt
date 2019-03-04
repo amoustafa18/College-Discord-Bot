@@ -1,6 +1,6 @@
 devBot command help
 ```
-help
-ping
-cat
+help - To get this message
+ping - To see if the bot is online with ping time
+cat - get a cute cat that we stole off reddit
 ```
