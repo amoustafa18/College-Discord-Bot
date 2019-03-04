@@ -167,7 +167,8 @@ public class Anagram extends AbstractMinigame {
 
 		@Override
 		public void run() {
-			String guess = getMessage().getContent().split(" ")[1];
+			
+			String guess = getMessage().getContent().split(" ", 2)[1];
 
 			System.out.println(guess);
 			System.out.println(randomlyChosenUser.getName());
