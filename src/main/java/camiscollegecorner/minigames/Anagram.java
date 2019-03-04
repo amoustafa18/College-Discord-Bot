@@ -115,7 +115,7 @@ public class Anagram extends AbstractMinigame {
 		String anagram = "";
 		
 		for(int i = 0; i < splitStrings.length; i++){
-			List<Character> chars = new ArrayList<Character>;
+			List<Character> chars = new ArrayList<>();
 
 			char[] charArray = splitStrings[i].toCharArray();
 

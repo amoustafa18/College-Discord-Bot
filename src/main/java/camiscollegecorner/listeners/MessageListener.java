@@ -40,7 +40,7 @@ public class MessageListener implements IListener<MessageReceivedEvent> {
             }
         }
 
-        if(messageEvent.getAuthor().getName().equals("Santorno") && messageEvent.getMessage().getContent().equals("c" +
+        if(messageEvent.getAuthor().hasRole(messageEvent.getGuild().getRoleByID(Constants.BOT_TEAM_ROLE_ID)) && messageEvent.getMessage().getContent().equals("c" +
                 "!anagram")) {
             currentMinigame = new Anagram(new String[] {CmdHandler.CMD_GUESS}, messageEvent.getChannel());
             currentMinigame.startGame();
