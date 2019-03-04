@@ -110,23 +110,30 @@ public class Anagram extends AbstractMinigame {
 	 * @return The anagrammed string
 	 */
 	private String anagram(String original) {
-		List<Character> chars = new ArrayList<>();
-
-		char[] charArray = original.toCharArray();
-
-		for(char c : charArray) {
-			chars.add(c);
-		}
-
-		Collections.shuffle(chars);
-
+		
+		String[] splitStrings = original.split(" ");
 		String anagram = "";
+		
+		for(int i = 0; i < splitStrings.length; i++){
+			List<Character> chars = new ArrayList<Character>;
 
-		for(char c : chars) {
-			anagram += c;
+			char[] charArray = splitStrings[i].toCharArray();
+
+			for(char c : charArray) {
+				chars.add(c);
+			}
+
+			Collections.shuffle(chars);
+
+			for(char c : chars) {
+				anagram += c;
+			}
+			
+			anagram += " ";
 		}
-
+		
 		return anagram;
+		
 	}
 
 	private class AnagramCmdHandler extends CmdHandler {
