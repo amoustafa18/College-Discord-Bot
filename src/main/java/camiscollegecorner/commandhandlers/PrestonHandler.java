@@ -5,7 +5,9 @@ import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.obj.IMessage;
 
 import java.io.File;
-import java.io.InputStream;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,52 +15,30 @@ public class PrestonHandler extends AbstractHandler {
 
     public PrestonHandler(IMessage message) { super(message); }
 
+    /** When the number of elements in {@code links} dips below this number, restock the list on another thread. */
+    private static final int RESTOCK_THRESHOLD = 5;
+
+    /** A list of URLs to preston pictures. */
+    private static List<String> links = new ArrayList<>();
+
+    /** A SecureRandom object used for generating random colors. */
+    private static SecureRandom secureRandom = new SecureRandom();
+
 
     @Override
     public void run() {
-
-        InputStream is = this.getClass().getClassLoader().getResourceAsStream(Constants.PRESTON_LIST);
-        System.out.println(is);
         Random random = new Random();
-        String line = "";
-        String response = "";
 
-
-        File file = new File(Constants.PRESTON_LIST);
-        if(file.exists()) {
-            try (Scanner s = new Scanner(file)) {
-               //figuring out how many lines are in the file
-                int count = 0;
-                while (s.hasNextLine()) {
-                    count++;
-                    s.nextLine();
-                }
-                s.close();
-                //couldnt figure out how to bring the scanner back to the top of the file so i just made a new scanner
-               Scanner scanner = new Scanner(file);
-
-
-               //ranndom preston picture
-
-                int val = random.nextInt(count);
-                for(int i = 0; i <= val; i++)
-                    line = scanner.nextLine();
-
-                response = line;
-
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.err.println("\nUnable to load preston");
-            }
-        }
         EmbedObject.ImageObject image = new EmbedObject.ImageObject();
-        image.url = response;
+
+        int randomIndex = random.nextInt(links.size());
+        image.url = links.get(randomIndex);
+        links.remove(randomIndex);
+        checkForRestock();
 
         EmbedObject embed = new EmbedObject();
         embed.image = image;
-        int color = random.nextInt(1000000);
+        int color = secureRandom.nextInt(1000000);
         embed.color = color;
         embed.type = "image";
         embed.description = "Preston!";
@@ -66,5 +46,39 @@ public class PrestonHandler extends AbstractHandler {
         getMessage().getChannel().sendMessage(embed);
     }
 
+    /**
+     * Restocks {@code links} on a different thread if the number of elements in the list drops below {@code
+     * RESTOCK_THRESHOLD}
+     */
+    private void checkForRestock() {
+        if(links.size() < RESTOCK_THRESHOLD) {
+            Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                    cachePrestonImages();
+                }
+            };
 
+            Thread t = new Thread(r);
+            t.start();
+        }
+    }
+
+    /**
+     * Grabs all of the URLs from file {@code Constants.PRESTON_LIST} and adds it to {@code links}.
+     */
+    public static void cachePrestonImages() {
+        File file = new File(Constants.PRESTON_LIST);
+        if(file.exists()) {
+            try (Scanner s = new Scanner(file)) {
+
+                while (s.hasNextLine()) {
+                    links.add(s.nextLine());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("\nUnable to load preston");
+            }
+        }
+    }
 }

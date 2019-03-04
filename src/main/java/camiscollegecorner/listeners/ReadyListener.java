@@ -1,6 +1,7 @@
 package camiscollegecorner.listeners;
 
 import camiscollegecorner.Constants;
+import camiscollegecorner.commandhandlers.PrestonHandler;
 import camiscollegecorner.reddit.CatImageGrabber;
 import sx.blah.discord.Discord4J;
 import sx.blah.discord.api.events.IListener;
@@ -15,6 +16,7 @@ public class ReadyListener implements IListener<ReadyEvent> {
 	public void handle(ReadyEvent readyEvent) {
 		readyEvent.getClient().changePresence(StatusType.ONLINE, ActivityType.PLAYING, Constants.PLAYING_TEXT);
 		CatImageGrabber.getInstance().cache();
+		PrestonHandler.cachePrestonImages();
 		Discord4J.LOGGER.info("Bot ready");
 	}
 }
