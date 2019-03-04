@@ -120,7 +120,7 @@ public class Anagram extends AbstractMinigame {
 			char[] charArray = splitStrings[i].toCharArray();
 
 			for(char c : charArray) {
-				chars.add(c);
+				chars.add(Character.toLowerCase(c));
 			}
 
 			Collections.shuffle(chars);
