@@ -55,7 +55,7 @@ public abstract class Constants {
 	public static final long STANA_USER_ID = 163998218965876737l;
 	public static final long CAMI_USER_ID = 215333525795110913l;
 
-	public static final String COMMAND_LIST = "/src/main/resources/commands.txt";
+	public static final String COMMAND_LIST = "src/main/resources/commands.txt";
 	public static final String CMD_PREFIX = "c!";
 	public static final String PLAYING_TEXT = "Type " + CMD_PREFIX + "help for commands";
 }

@@ -18,25 +18,26 @@ public class HelpHandler extends AbstractHandler {
 
 	@Override
 	public void run() {
-		File commandList = null;
-		BufferedReader br = null;
+
 		InputStream is = this.getClass().getClassLoader().getResourceAsStream(Constants.COMMAND_LIST);
 		System.out.println(is);
 
+		String line = "";
+		String response = "";
 
 		Properties config = new Properties();
 		File file = new File(Constants.COMMAND_LIST);
-		if(file.exists()){
-			try(FileInputStream in = new FileInputStream(file)){
-				config.load(in);
-				System.out.println("it works");
-			}catch(IOException e){
+		if(file.exists()) {
+			try (Scanner s = new Scanner(file)) {
+				while((line = s.nextLine()) != null) {
+				response += line + "\n";
+			}
+
+			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("\nThere was an error reading the config file...");
+				System.err.println("\nUnable to load commands");
 			}
 		}
-
-		String response = "";
 
 		getMessage().getAuthor().getOrCreatePMChannel().sendMessage(response);
 	}

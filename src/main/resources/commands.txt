@@ -1,5 +1,6 @@
-this
-is a test
-``` and i believe
-it is a good one tbh
+devBot command help
+```
+help
+ping
+cat
 ```
