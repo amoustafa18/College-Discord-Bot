@@ -25,7 +25,7 @@ public class HelpHandler extends AbstractHandler {
 		String line = "";
 		String response = "";
 
-		Properties config = new Properties();
+
 		File file = new File(Constants.COMMAND_LIST);
 		if(file.exists()) {
 			try (Scanner s = new Scanner(file)) {

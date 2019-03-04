@@ -16,6 +16,7 @@ public class CmdHandler {
     private static final String CMD_PING = "ping";
     private static final String CMD_CAT = "cat";
     private static final String CMD_STOP = "stop";
+    private static final String CMD_PRESTON = "preston";
     private CatImageGrabber catImageGrabber;
 
     public CmdHandler(IMessage message) {
@@ -44,6 +45,9 @@ public class CmdHandler {
         }else if(content.equals(CMD_STOP)){
            StopHandler h = new StopHandler(message);
            h.start();
+        }else if(content.equals(CMD_PRESTON)){
+            PrestonHandler h = new PrestonHandler(message);
+            h.start();
         }
 
     }
