@@ -32,8 +32,7 @@ public class CmdHandler {
         //remove the command prefix:
         content = content.substring(Constants.CMD_PREFIX.length());
 
-        if(content.startsWith(CMD_HELP)) {
-
+        if(content.equals(CMD_HELP)) {
             HelpHandler h = new HelpHandler(message);
             h.start();
         } else if(content.equals(CMD_PING)) {
