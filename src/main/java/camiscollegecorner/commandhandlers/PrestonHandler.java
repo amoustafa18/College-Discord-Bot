@@ -26,16 +26,18 @@ public class PrestonHandler extends AbstractHandler {
         File file = new File(Constants.PRESTON_LIST);
         if(file.exists()) {
             try (Scanner s = new Scanner(file)) {
+               //figuring out how many lines are in the file
                 int count = 0;
                 while (s.hasNextLine()) {
                     count++;
                     s.nextLine();
                 }
                 s.close();
-
+                //couldnt figure out how to bring the scanner back to the top of the file so i just made a new scanner
                Scanner scanner = new Scanner(file);
 
-                line = scanner.nextLine();
+
+               //ranndom preston picture
                 Random random = new Random();
                 int val = random.nextInt(count);
                 for(int i = 0; i <= val; i++)
