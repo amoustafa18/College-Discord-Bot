@@ -17,6 +17,10 @@ public class CmdHandler {
     private static final String CMD_CAT = "cat";
     private static final String CMD_STOP = "stop";
     private static final String CMD_PRESTON = "preston";
+
+    //commands below this comment are reserved for minigames
+    public static final String CMD_GUESS = "guess";
+
     private CatImageGrabber catImageGrabber;
 
     public CmdHandler(IMessage message) {
@@ -49,6 +53,9 @@ public class CmdHandler {
             PrestonHandler h = new PrestonHandler(message);
             h.start();
         }
+    }
 
+    public IMessage getMessage() {
+        return message;
     }
 }

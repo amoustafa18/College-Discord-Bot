@@ -20,6 +20,8 @@ public abstract class Constants {
 	public static final ReactionEmoji STAR_EMOJI = ReactionEmoji.of("⭐");
 	public static final ReactionEmoji CHICKEN_EMOJI = ReactionEmoji.of("\uD83D\uDC14");
 	public static final ReactionEmoji HEART_DECORATION_EMOJI = ReactionEmoji.of("\uD83D\uDC9F");
+	public static final ReactionEmoji WHITE_CHECK_EMOJI  = ReactionEmoji.of("✅");
+	public static final ReactionEmoji RED_X_EMOJI = ReactionEmoji.of("❌");
 
 	public static final int PIN_STAR_REACT_COUNT = 7;
 
