@@ -41,6 +41,8 @@ public class StopHandler extends AbstractHandler {
         if(author.hasRole(botteam) || author.hasRole(admin)) {
             getMessage().getChannel().sendMessage("Shutting down");
             System.exit(0);
+        }else{
+            getMessage().getAuthor().getOrCreatePMChannel().sendMessage("You do not have access ot that command");
         }
     }
 }
