@@ -33,7 +33,7 @@ public class RandomMinigameStartListener extends MessageListener {
 		} else {
 			if(random.nextInt(10001) <= MINIGAME_START_CHANCE) {
 				//randomly pick a minigame
-				currentMinigame = new Anagram(messageEvent.getChannel(), null, false);
+				currentMinigame = new Anagram(messageEvent.getChannel(), null, true);
 				currentMinigame.startGame();
 			}
 		}

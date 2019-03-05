@@ -2,5 +2,6 @@ devBot command help
 ```
 help - To get this message
 ping - To see if the bot is online with ping time
-cat - get a cute cat that we stole off reddit
+cat - Get a cute cat that we stole off reddit
+anagram - Starts a new anagram minigame, currently in progress
 ```

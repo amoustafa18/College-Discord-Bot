@@ -73,4 +73,6 @@ public class CatHandler extends AbstractHandler {
 
 		getMessage().getChannel().sendMessage(embed);
 	}
+
+
 }

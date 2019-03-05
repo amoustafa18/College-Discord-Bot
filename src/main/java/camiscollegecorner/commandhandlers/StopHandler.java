@@ -42,7 +42,7 @@ public class StopHandler extends AbstractHandler {
             getMessage().getChannel().sendMessage("Shutting down");
             System.exit(0);
         }else{
-            getMessage().getAuthor().getOrCreatePMChannel().sendMessage("You do not have access ot that command");
+            onCommandUsedIncorrectly();
         }
     }
 }

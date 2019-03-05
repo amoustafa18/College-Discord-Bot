@@ -37,6 +37,7 @@ public abstract class AbstractHandler extends Thread {
 				channelsActive.contains(Constants.ALL_CHANNELS_FLAG_ID) ||
 				sourceChannelLongId == Constants.BOT_TEAM_CHANNEL_ID)) {
 			//command is not to be used in this channel
+			onCommandUsedIncorrectly();
 			shouldRun = false;
 		}
 	}
@@ -55,5 +56,10 @@ public abstract class AbstractHandler extends Thread {
 
 	public boolean shouldRun() {
 		return shouldRun;
+	}
+
+	public void onCommandUsedIncorrectly(){
+		getMessage().getAuthor().getOrCreatePMChannel().sendMessage("That command has been used incorrectly" +
+				", you do not have access to that command, or it can not be used in that channel.");
 	}
 }
