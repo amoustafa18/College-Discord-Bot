@@ -2,7 +2,7 @@ package camiscollegecorner;
 
 import camiscollegecorner.listeners.MessageListener;
 import camiscollegecorner.listeners.ReactionAddListener;
-import camiscollegecorner.listeners.ReactionDeleteListener;
+import camiscollegecorner.listeners.ReactionRemoveListener;
 import camiscollegecorner.listeners.ReadyListener;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
@@ -21,7 +21,7 @@ public class Main {
         EventDispatcher dispatcher = client.getDispatcher();
         dispatcher.registerListener(new MessageListener());
         dispatcher.registerListener(new ReactionAddListener());
-        dispatcher.registerListener(new ReactionDeleteListener());
+        dispatcher.registerListener(new ReactionRemoveListener());
         dispatcher.registerListener(new ReadyListener());
     }
 

@@ -6,29 +6,41 @@ import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.handle.obj.IRole;
 import sx.blah.discord.handle.obj.IUser;
 
+import java.util.List;
+
+/** This class handles the stop command. */
 public class StopHandler extends AbstractHandler {
 
-    public StopHandler(IMessage message) { super(message); }
+    /** This constructs a StopHandler. This object should handle the stop command. The stop
+     * command should close this program, logging the bot offline.
+     * @param message The IMessage issuing this command.
+     */
+    public StopHandler(IMessage message) {
+        super(message);
+
+        List<Long> activeChannels = channelsActive();
+
+        for(long l : Constants.ALL_CHANNELS_FLAG) {
+            activeChannels.add(l);
+        }
+    }
 
     @Override
     public void run() {
-      IUser author = getMessage().getAuthor();
-      IGuild sourceGuild = getMessage().getGuild();
-      IRole admin = sourceGuild.getRoleByID(Constants.ADMIN_ROLE_ID);
-      IRole botteam = sourceGuild.getRoleByID(Constants.BOT_TEAM_ROLE_ID);
+        super.run();
 
-        if(author.hasRole(botteam) || author.hasRole(admin))
-        {
+        if(!shouldRun()) {
+            return;
+        }
+
+        IUser author = getMessage().getAuthor();
+        IGuild sourceGuild = getMessage().getGuild();
+        IRole admin = sourceGuild.getRoleByID(Constants.ADMIN_ROLE_ID);
+        IRole botteam = sourceGuild.getRoleByID(Constants.BOT_TEAM_ROLE_ID);
+
+        if(author.hasRole(botteam) || author.hasRole(admin)) {
             getMessage().getChannel().sendMessage("Shutting down");
             System.exit(0);
         }
-
-        //people were complaing that it sends a message if you say !stop and cant have any of the role
-        //ill let someone else decide what to do
-//        else
-//            getMessage().getChannel().sendMessage("You are not admin or on bot team" +
-//                    ". Ask bot team or any admin. Please do not spam this command");
     }
-
-
 }

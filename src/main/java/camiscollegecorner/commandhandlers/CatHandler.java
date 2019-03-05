@@ -7,6 +7,7 @@ import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.obj.IMessage;
 
 import java.security.SecureRandom;
+import java.util.List;
 
 /** This class handles the cat command. */
 public class CatHandler extends AbstractHandler {
@@ -14,13 +15,26 @@ public class CatHandler extends AbstractHandler {
 	/** For generating random hexadecimal color codes. */
 	private static SecureRandom random = new SecureRandom();
 
+	/** This constructs a CatHandler. This object should handle the cat command. The cat
+	 * command should cause the object to embed a random image of a cat using a CatGrabber and send it to the channel
+	 * the command was issued on.
+	 * @param message The IMessage issuing this command.
+	 */
 	public CatHandler(IMessage message) {
 		super(message);
+
+		List<Long> activeChannels = channelsActive();
+
+		for(long l : Constants.CAT_CHANNELS) {
+			activeChannels.add(l);
+		}
 	}
 
 	@Override
 	public void run() {
-		if(getMessage().getChannel().getLongID() != Constants.CUTE_PICS_CHANNEL_ID) {
+		super.run();
+
+		if(!shouldRun()) {
 			return;
 		}
 
@@ -53,6 +67,7 @@ public class CatHandler extends AbstractHandler {
 		embed.title = title;
 		embed.description = "Found on r/" + sourceSubreddit;
 
+		//generate a random color for the embed
 		int color = random.nextInt(1000000);
 		embed.color = color;
 

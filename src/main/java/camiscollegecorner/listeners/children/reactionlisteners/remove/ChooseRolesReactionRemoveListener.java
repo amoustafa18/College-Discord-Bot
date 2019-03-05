@@ -1,17 +1,27 @@
-package camiscollegecorner.listeners;
+package camiscollegecorner.listeners.children.reactionlisteners.remove;
 
 import camiscollegecorner.Constants;
-import sx.blah.discord.api.events.IListener;
+import camiscollegecorner.listeners.ReactionRemoveListener;
+import sx.blah.discord.api.events.Event;
 import sx.blah.discord.handle.impl.events.guild.channel.message.reaction.ReactionRemoveEvent;
 import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.handle.obj.IRole;
 import sx.blah.discord.handle.obj.IUser;
 
-/** This class listens for reactions being deleted from messages. */
-public class ReactionDeleteListener implements IListener<ReactionRemoveEvent> {
+/** This class listens for reactions being removed from the "choose roles" message. */
+public class ChooseRolesReactionRemoveListener extends ReactionRemoveListener {
+
+	/** The singleton instance of this class. */
+	private static final ChooseRolesReactionRemoveListener INSTANCE = new ChooseRolesReactionRemoveListener();
+
+	private ChooseRolesReactionRemoveListener() {
+
+	}
 
 	@Override
-	public void handle(ReactionRemoveEvent reactionRemoveEvent) {
+	public void handleEvent(Event event) {
+		ReactionRemoveEvent reactionRemoveEvent = (ReactionRemoveEvent) event;
+
 		if(reactionRemoveEvent.getMessageID() == Constants.CHOOSE_ROLES_MESSAGE_ID) {
 			//we are dealing with choose roles message
 			IUser reactor = reactionRemoveEvent.getUser();
@@ -23,7 +33,7 @@ public class ReactionDeleteListener implements IListener<ReactionRemoveEvent> {
 				IRole freshmanRole = sourceGuild.getRoleByID(Constants.FRESHMAN_ROLE_ID);
 
 				if(reactor.hasRole(freshmanRole))
-				reactor.removeRole(freshmanRole);
+					reactor.removeRole(freshmanRole);
 			} else if(reactionId == Constants.HATCHING_EMOJI.getLongID()) {
 				//sophomore
 				IRole sophomoreRole = sourceGuild.getRoleByID(Constants.SOPHOMORE_ROLE_ID);
@@ -87,5 +97,9 @@ public class ReactionDeleteListener implements IListener<ReactionRemoveEvent> {
 				reactor.removeRole(gap);
 			}
 		}
+	}
+
+	public static ChooseRolesReactionRemoveListener getInstance() {
+		return INSTANCE;
 	}
 }

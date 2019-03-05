@@ -1,7 +1,6 @@
 package camiscollegecorner.commandhandlers;
 
 import camiscollegecorner.Constants;
-import camiscollegecorner.reddit.CatImageGrabber;
 import sx.blah.discord.handle.obj.IMessage;
 
 /** A class that handles all received messages starting with {@code Constants.CMD_PREFIX} */
@@ -10,23 +9,19 @@ public class CmdHandler {
     /** The message that begins with {@code Constants.CMD_PREFIX} */
     private IMessage message;
 
-    private static final String INVALID_USAGE = "Invalid use of command.";
-
     private static final String CMD_HELP = "help";
     private static final String CMD_PING = "ping";
     private static final String CMD_CAT = "cat";
     private static final String CMD_STOP = "stop";
     private static final String CMD_PRESTON = "preston";
 
-    //commands below this comment are reserved for minigames
+    /** Commands below this comment are reserved for minigames. They should be public so they can be accessed by the
+     * minigame classes themselves.
+     */
     public static final String CMD_GUESS = "guess";
-
-    private CatImageGrabber catImageGrabber;
 
     public CmdHandler(IMessage message) {
         this.message = message;
-        this.catImageGrabber = CatImageGrabber.getInstance();
-
     }
 
     /**
@@ -34,6 +29,7 @@ public class CmdHandler {
      */
     public void handle() {
         String content = message.getContent().toLowerCase();
+
         //remove the command prefix:
         content = content.substring(Constants.CMD_PREFIX.length());
 

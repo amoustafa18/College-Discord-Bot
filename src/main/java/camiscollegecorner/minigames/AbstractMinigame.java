@@ -3,32 +3,36 @@ package camiscollegecorner.minigames;
 import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IUser;
 
 /** An abstract version of a Discord minigame. */
 public abstract class AbstractMinigame {
 
-	private String[] commands;
+	/** The channel this minigame was started on. */
 	private IChannel sourceChannel;
+
+	/** The user that started this minigame, if one exists. Otherwise, this is null. */
+	private IUser sourceUser;
 
 	/** The title to use for embed objects when sending info about minigames to server. */
 	public static final String EMBED_OBJECT_TITLE = "MINIGAME";
 
-	/** An EmbedFieldObject storing a general introduction to the minigame. */
-	public static final EmbedObject.EmbedFieldObject MINIGAME_INSTRUCTIONS = new EmbedObject.EmbedFieldObject();
+	/** The footer to use on the minigame embed objects when the game was started automatically. */
+	public static final String EMBED_FOOTER_AUTOMATIC = "This minigame was triggered automatically.";
+
+	/** Whether or not this minigame was triggered automatically. */
+	private boolean automaticallyStarted = false;
 
 	/**
 	 * Construct an AbstractMinigame.
-	 * @param commands An array of commands used by this minigame. Each concrete minigame should handle this array
-	 *                    accordingly.
-	 * @param sourceChannel The channel in which the minigame was triggered on.
+	 * @param sourceChannel The channel this minigame was sourced from.
+	 * @param sourceUser The user this minigame was started by. Null if this was automatically started.
+	 * @param automaticallyStarted Whether or not this minigame was randomly started.
 	 */
-	public AbstractMinigame(String[] commands, IChannel sourceChannel) {
-		this.commands = commands;
+	public AbstractMinigame(IChannel sourceChannel, IUser sourceUser, boolean automaticallyStarted) {
 		this.sourceChannel = sourceChannel;
-
-		MINIGAME_INSTRUCTIONS.inline = false;
-		MINIGAME_INSTRUCTIONS.name = "Instructions";
-		MINIGAME_INSTRUCTIONS.value = "A minigame has been randomly triggered on this channel!";
+		this.sourceUser = sourceUser;
+		this.automaticallyStarted = automaticallyStarted;
 	}
 
 	/**
@@ -46,11 +50,31 @@ public abstract class AbstractMinigame {
 	 */
 	public abstract void endGame();
 
-	public String[] getCommands() {
-		return commands;
-	}
-
 	public IChannel getSourceChannel() {
 		return sourceChannel;
+	}
+
+	public boolean isAutomaticallyStarted() {
+		return automaticallyStarted;
+	}
+
+	/**
+	 * Generates a footer for all embed objects sent by this minigame. If the minigame was started automatically,
+	 * return {@code EMBED_FOOTER_AUTOMATIC}. Otherwise, return a footer describing who started this minigame along
+	 * with their profile picture.
+	 * @return The generated footer.
+	 */
+	public EmbedObject.FooterObject generateFooter() {
+		EmbedObject.FooterObject footer = new EmbedObject.FooterObject();
+
+		if(isAutomaticallyStarted()) {
+			footer.text = EMBED_FOOTER_AUTOMATIC;
+		} else {
+			footer.text = "This minigame was started by " + sourceUser.getName() + ". No currency can be earned by " +
+					"user-started minigames.";
+			footer.icon_url = sourceUser.getAvatarURL();
+		}
+
+		return footer;
 	}
 }

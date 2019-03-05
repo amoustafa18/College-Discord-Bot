@@ -11,9 +11,23 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+/** This class handles the preston command. */
 public class PrestonHandler extends AbstractHandler {
 
-    public PrestonHandler(IMessage message) { super(message); }
+    /** This constructs a PrestonHandler. This object should handle the preston command. The preston
+     * command should respond with a random picture of Preston the cat embedded. The picture of the cat will be
+     * pulled from a text file.
+     * @param message The IMessage issuing this command.
+     */
+    public PrestonHandler(IMessage message) {
+        super(message);
+
+        List<Long> activeChannels = channelsActive();
+
+        for(long l : Constants.PRESTON_CHANNELS) {
+            activeChannels.add(l);
+        }
+    }
 
     /** When the number of elements in {@code links} dips below this number, restock the list on another thread. */
     private static final int RESTOCK_THRESHOLD = 5;
@@ -24,9 +38,14 @@ public class PrestonHandler extends AbstractHandler {
     /** A SecureRandom object used for generating random colors. */
     private static SecureRandom secureRandom = new SecureRandom();
 
-
     @Override
     public void run() {
+        super.run();
+
+        if(!shouldRun()) {
+            return;
+        }
+
         Random random = new Random();
 
         EmbedObject.ImageObject image = new EmbedObject.ImageObject();
@@ -38,6 +57,8 @@ public class PrestonHandler extends AbstractHandler {
 
         EmbedObject embed = new EmbedObject();
         embed.image = image;
+
+        //generate a random color for the embed
         int color = secureRandom.nextInt(1000000);
         embed.color = color;
         embed.type = "image";
