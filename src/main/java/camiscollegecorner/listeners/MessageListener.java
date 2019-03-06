@@ -5,6 +5,7 @@ import camiscollegecorner.listeners.children.messagelisteners.CommandMessageList
 import camiscollegecorner.listeners.children.messagelisteners.RandomMinigameStartListener;
 import camiscollegecorner.minigames.AbstractMinigame;
 import camiscollegecorner.minigames.Anagram;
+import camiscollegecorner.minigames.PicPick;
 import sx.blah.discord.api.events.IListener;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
@@ -27,6 +28,12 @@ public class MessageListener extends AbstractListener implements IListener<Messa
         if(messageEvent.getAuthor().hasRole(messageEvent.getGuild().getRoleByID(Constants.BOT_TEAM_ROLE_ID)) && messageEvent.getMessage().getContent().equals("c" +
                 "!anagram")) {
             currentMinigame = new Anagram(messageEvent.getChannel(), messageEvent.getAuthor(), false);
+            currentMinigame.startGame();
+        }
+
+        if(messageEvent.getAuthor().hasRole(messageEvent.getGuild().getRoleByID(Constants.BOT_TEAM_ROLE_ID)) && messageEvent.getMessage().getContent().equals("c" +
+                "!picpick")) {
+            currentMinigame = new PicPick(messageEvent.getChannel(), messageEvent.getAuthor(), false);
             currentMinigame.startGame();
         }
     }

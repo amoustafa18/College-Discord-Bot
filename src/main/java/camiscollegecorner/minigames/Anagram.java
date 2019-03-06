@@ -30,6 +30,7 @@ public class Anagram extends AbstractMinigame {
 	/** For randomly choosing a user. */
 	private Random random = new Random();
 
+	/** The CmdHandler bound to this minigame. */
 	private AnagramCmdHandler anagramCmdHandler;
 
 	/** The description to use for the embed objects sent by this minigame. */
@@ -153,8 +154,6 @@ public class Anagram extends AbstractMinigame {
 				//remove the command prefix:
 				content = content.substring(Constants.CMD_PREFIX.length());
 
-				System.out.println(content);
-					System.out.println(content);
 					if(content.startsWith(CmdHandler.CMD_GUESS)) {
 						//guess command PREFIXCMD [tag of guess]
 						GuessHandler h = new GuessHandler(getMessage());

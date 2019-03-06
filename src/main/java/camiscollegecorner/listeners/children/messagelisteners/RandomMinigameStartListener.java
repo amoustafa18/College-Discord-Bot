@@ -2,6 +2,7 @@ package camiscollegecorner.listeners.children.messagelisteners;
 
 import camiscollegecorner.listeners.MessageListener;
 import camiscollegecorner.minigames.Anagram;
+import camiscollegecorner.minigames.PicPick;
 import sx.blah.discord.api.events.Event;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 
@@ -33,8 +34,17 @@ public class RandomMinigameStartListener extends MessageListener {
 		} else {
 			if(random.nextInt(10001) <= MINIGAME_START_CHANCE) {
 				//randomly pick a minigame
-				currentMinigame = new Anagram(messageEvent.getChannel(), null, true);
-				currentMinigame.startGame();
+				int randNum = random.nextInt(2);
+
+				switch(randNum) {
+					case 0:
+						currentMinigame = new Anagram(messageEvent.getChannel(), null, true);
+						currentMinigame.startGame();
+						break;
+					case 1:
+						currentMinigame = new PicPick(messageEvent.getChannel(), null, true);
+						currentMinigame.startGame();
+				}
 			}
 		}
 	}
