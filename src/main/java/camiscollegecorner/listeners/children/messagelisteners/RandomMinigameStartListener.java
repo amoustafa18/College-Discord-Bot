@@ -15,7 +15,7 @@ public class RandomMinigameStartListener extends MessageListener {
 
 	/** The chances of a minigame starting per message per 10 000. For example, if this is x, there is likely to be x
 	 *  minigames per 10 000 messages received. */
-	private static final int MINIGAME_START_CHANCE = 20;
+	private static final int MINIGAME_START_CHANCE = 40;
 
 	/** The singleton instance of this class. */
 	private static final RandomMinigameStartListener INSTANCE = new RandomMinigameStartListener();
