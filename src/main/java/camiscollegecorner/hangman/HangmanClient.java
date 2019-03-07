@@ -21,7 +21,8 @@ public interface HangmanClient {
 	int getMaxHealth();
 
 	/** Returns the current health of the "hanging man". This is equivalent to the number of incorrect guesses the
-	 * client has already exhausted. */
+	 * client has already exhausted. This means, the higher the health, the closer the client is to death (the
+	 * opposite of what we typically consider "health". */
 	int getCurrentHealth();
 
 	/** Returns a list of all of the previously guessed characters. */

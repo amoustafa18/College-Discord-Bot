@@ -96,6 +96,15 @@ public abstract class Constants {
 	public static final String COMMAND_LIST = "src/main/resources/commands.txt";
 	public static final String PRESTON_LIST = "src/main/resources/preston.txt";
 
+	public static final String HANGMAN_IMAGE_0 = "https://cdn.discordapp.com/attachments/550872387802103809/553056240864067624/0.png";
+	public static final String HANGMAN_IMAGE_1 = "https://cdn.discordapp.com/attachments/550872387802103809/553056264536457217/1.png";
+	public static final String HANGMAN_IMAGE_2 = "https://cdn.discordapp.com/attachments/550872387802103809/553056284107210752/2.png";
+	public static final String HANGMAN_IMAGE_3 = "https://cdn.discordapp.com/attachments/550872387802103809/553056309659041794/3.png";
+	public static final String HANGMAN_IMAGE_4 = "https://cdn.discordapp.com/attachments/550872387802103809/553056329183526912/4.png";
+	public static final String HANGMAN_IMAGE_5 = "https://cdn.discordapp.com/attachments/550872387802103809/553056351950077972/5.png";
+	public static final String HANGMAN_IMAGE_6 = "https://cdn.discordapp.com/attachments/550872387802103809/553056380404105216/6.png";
+	public static final String HANGMAN_IMAGE_7 = "https://cdn.discordapp.com/attachments/550872387802103809/553056403477102593/7.png";
+
 	public static final String CMD_PREFIX = "c!";
 	public static final String PLAYING_TEXT = "Type " + CMD_PREFIX + "help for commands";
 }

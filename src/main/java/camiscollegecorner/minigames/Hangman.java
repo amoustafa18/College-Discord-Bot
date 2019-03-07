@@ -6,8 +6,10 @@ import camiscollegecorner.commandhandlers.SingleThreadedAbstractHandler;
 import camiscollegecorner.hangman.HangmanClient;
 import camiscollegecorner.hangman.HangmanClientImpl;
 import camiscollegecorner.listeners.MessageListener;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
+import sx.blah.discord.handle.impl.obj.Embed;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.handle.obj.IUser;
@@ -33,6 +35,9 @@ public class Hangman extends AbstractMinigame {
 
 	/** The color to use for the embed objects sent by this minigame. */
 	private static final int HANGMAN_EMBED_COLOR = 0xe88914;
+
+	/** The thumbnail of the hanging man to be used for this minigame's embeds. */
+	private static final EmbedObject.ThumbnailObject HANGMAN_THUMBNAIL = new EmbedObject.ThumbnailObject();
 
 	/** An EmbedFieldObject storing information about the picpick game. */
 	private static final EmbedObject.EmbedFieldObject HANGMAN_EMBED_FIELD = new EmbedObject.EmbedFieldObject();
@@ -62,6 +67,8 @@ public class Hangman extends AbstractMinigame {
 
 		participants = new HashSet<>();
 		hangmanClient = new HangmanClientImpl();
+
+		HANGMAN_THUMBNAIL.url = Constants.HANGMAN_IMAGE_0;
 
 		HANGMAN_EMBED_FIELD.inline = false;
 		HANGMAN_EMBED_FIELD.name = "Hangman!";
@@ -103,6 +110,7 @@ public class Hangman extends AbstractMinigame {
 		EmbedObject embed = new EmbedObject();
 		embed.title = AbstractMinigame.EMBED_OBJECT_TITLE;
 		embed.description = HANGMAN_DESCRIPTION;
+		embed.thumbnail = HANGMAN_THUMBNAIL;
 
 		embed.color = HANGMAN_EMBED_COLOR;
 
@@ -124,6 +132,33 @@ public class Hangman extends AbstractMinigame {
 
 	private void updateGame() {
 		getSourceChannel().sendMessage(GAME_EMBED);
+	}
+
+	private void updateThumbnail() {
+		switch(HANGMAN_THUMBNAIL.url) {
+			case Constants.HANGMAN_IMAGE_0:
+				HANGMAN_THUMBNAIL.url = Constants.HANGMAN_IMAGE_1;
+				break;
+			case Constants.HANGMAN_IMAGE_1:
+				HANGMAN_THUMBNAIL.url = Constants.HANGMAN_IMAGE_2;
+				break;
+			case Constants.HANGMAN_IMAGE_2:
+				HANGMAN_THUMBNAIL.url = Constants.HANGMAN_IMAGE_3;
+				break;
+			case Constants.HANGMAN_IMAGE_3:
+				HANGMAN_THUMBNAIL.url = Constants.HANGMAN_IMAGE_4;
+				break;
+			case Constants.HANGMAN_IMAGE_4:
+				HANGMAN_THUMBNAIL.url = Constants.HANGMAN_IMAGE_5;
+				break;
+			case Constants.HANGMAN_IMAGE_5:
+				HANGMAN_THUMBNAIL.url = Constants.HANGMAN_IMAGE_6;
+				break;
+			case Constants.HANGMAN_IMAGE_6:
+				HANGMAN_THUMBNAIL.url = Constants.HANGMAN_IMAGE_7;
+			case Constants.HANGMAN_IMAGE_7:
+				HANGMAN_THUMBNAIL.url = Constants.HANGMAN_IMAGE_7;
+		}
 	}
 
 	@Override
@@ -236,7 +271,7 @@ public class Hangman extends AbstractMinigame {
 			if(hangmanClient.getCurrentHealth() > currentHealth) {
 				//incorrect guess
 				getMessage().addReaction(Constants.RED_X_EMOJI);
-				//TODO update thumbnail image
+				updateThumbnail();
 				//TODO update guesses remaining field
 				//TODO append guess to guesses made field
 
