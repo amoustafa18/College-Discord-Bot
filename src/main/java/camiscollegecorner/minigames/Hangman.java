@@ -12,7 +12,9 @@ import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.handle.obj.IUser;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Hangman extends AbstractMinigame {
@@ -38,6 +40,13 @@ public class Hangman extends AbstractMinigame {
 	/** An EmbedFieldObject storing information about the secret phrase. */
 	private static final EmbedObject.EmbedFieldObject HANGMAN_PHRASE_FIELD = new EmbedObject.EmbedFieldObject();
 
+	/** An EmbedFieldObject storing the number of remaining incorrect guessed the client has. */
+	private static final EmbedObject.EmbedFieldObject HANGMAN_GUESSES_REMAINING_FIELD =
+			new EmbedObject.EmbedFieldObject();
+
+	/** An EmbedFieldObject storing all of the previous guesses made by the client. */
+	private static final EmbedObject.EmbedFieldObject HANGMAN_GUESS_LIST_FIELD = new EmbedObject.EmbedFieldObject();
+
 	/** The embed containing all of the game's information. */
 	private static EmbedObject GAME_EMBED = new EmbedObject();
 
@@ -62,7 +71,20 @@ public class Hangman extends AbstractMinigame {
 
 		HANGMAN_PHRASE_FIELD.inline = false;
 		HANGMAN_PHRASE_FIELD.name = "Phrase";
-		HANGMAN_PHRASE_FIELD.value = hangmanClient.getSecretPhraseAsDisplayed();
+		//TODO remove ternary operator when backend is complete
+		HANGMAN_PHRASE_FIELD.value = hangmanClient.getSecretPhraseAsDisplayed() == null ? "unimplemented" :
+				hangmanClient.getSecretPhraseAsDisplayed();
+
+		HANGMAN_GUESSES_REMAINING_FIELD.inline = true;
+		HANGMAN_GUESSES_REMAINING_FIELD.name = "Health";
+		HANGMAN_GUESSES_REMAINING_FIELD.value =
+				"The hanging man's health is " + (hangmanClient.getMaxHealth() - hangmanClient.getCurrentHealth());
+
+		//TODO remove ternary operator when backend is complete
+		HANGMAN_GUESS_LIST_FIELD.inline = true;
+		HANGMAN_GUESS_LIST_FIELD.name = "Guesses";
+		HANGMAN_GUESS_LIST_FIELD.value = hangmanClient.getAllGuesses() == null ? "unimplemented" :
+				characterListToString(hangmanClient.getAllGuesses());
 	}
 
 	@Override
@@ -84,10 +106,12 @@ public class Hangman extends AbstractMinigame {
 
 		embed.color = HANGMAN_EMBED_COLOR;
 
-		EmbedObject.EmbedFieldObject[] fields = new EmbedObject.EmbedFieldObject[2];
+		EmbedObject.EmbedFieldObject[] fields = new EmbedObject.EmbedFieldObject[4];
 
 		fields[0] = HANGMAN_EMBED_FIELD;
-		fields[1] = HANGMAN_PHRASE_FIELD;
+		fields[1] = HANGMAN_GUESS_LIST_FIELD;
+		fields[2] = HANGMAN_GUESSES_REMAINING_FIELD;
+		fields[3] = HANGMAN_PHRASE_FIELD;
 
 		embed.fields = fields;
 
@@ -130,7 +154,7 @@ public class Hangman extends AbstractMinigame {
 	}
 
 	/**
-	 * Converts {@code set} to a string by separating each of its elements by a comma.
+	 * Converts {@code set} to a Dtring by separating each of its elements by a comma.
 	 * */
 	private String userSetToString(Set<IUser> set) {
 		StringBuilder sb = new StringBuilder();
@@ -145,6 +169,20 @@ public class Hangman extends AbstractMinigame {
 		}
 
 		return sb.toString();
+	}
+
+	/**
+	 * Converts {@code list} to a String by separating each of its elements by a space.
+	 */
+	private String characterListToString(List<Character> list) {
+		StringBuilder sb = new StringBuilder();
+		Collections.sort(list);
+
+		for(Character c : list) {
+			sb.append(c + " ");
+		}
+
+		return sb.toString().trim();
 	}
 
 	private class HangmanCmdHandler extends CmdHandler {
