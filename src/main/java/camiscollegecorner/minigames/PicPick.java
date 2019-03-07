@@ -3,6 +3,7 @@ package camiscollegecorner.minigames;
 import camiscollegecorner.Constants;
 import camiscollegecorner.commandhandlers.AbstractHandler;
 import camiscollegecorner.commandhandlers.CmdHandler;
+import camiscollegecorner.commandhandlers.SingleThreadedAbstractHandler;
 import camiscollegecorner.listeners.MessageListener;
 import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
@@ -125,13 +126,13 @@ public class PicPick extends AbstractMinigame {
 				if(content.startsWith(CmdHandler.CMD_GUESS)) {
 					//guess command PREFIXCMD [username of guess]
 					PicPick.GuessHandler h = new PicPick.GuessHandler(getMessage());
-					h.start();
+					h.run();
 				}
 			}
 		}
 	}
 
-	private class GuessHandler extends AbstractHandler {
+	private class GuessHandler extends SingleThreadedAbstractHandler {
 		public GuessHandler(IMessage message) {
 			super(message);
 		}
