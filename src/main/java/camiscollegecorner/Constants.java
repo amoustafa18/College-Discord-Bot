@@ -45,13 +45,19 @@ public abstract class Constants {
 	public static final long ADMIN_ROLE_ID = 550353118664196106l;
 	public static final long BOT_TEAM_ROLE_ID = 551168467538018315l;
 
+	//general, nsfw general, memes, nsfw memes, happy-boi-hours, recommendations, cute pets, gaming, bot-channel, vc-text
 	public static final long CUTE_PICS_CHANNEL_ID = 550351556676026368l;
 	public static final long GENERAL_CHANNEL_ID = 550348648001699840l;
 	public static final long NSFW_GENERAL_CHANNEL_ID = 550348672613744641l;
 	public static final long VIDEOS_AND_MEMES_CHANNEL_ID = 550348902352814090l;
+	public static final long MEMES_CHANNEL_ID = 550348902352814090l;
 	public static final long NSFW_MEMES_CHANNEL_ID = 550545157498470403l;
 	public static final long BOT_CHANNEL_ID = 550359233267367956l;
 	public static final long BOT_TEAM_CHANNEL_ID = 550872387802103809l;
+	public static final long HAPPY_BOI_CHANNEL_ID = 552166060816728065l;
+	public static final long RECOMMENDATIONS_CHANNEL_ID = 550836693083619349l;
+	public static final long GAMING_CHANNEL_ID = 550826626204827649l;
+	public static final long VC_TEXT_CHANNEL_ID = 550890457736019969l;
 	public static final long ALL_CHANNELS_FLAG_ID = -42;
 
 	public static final long[] ALL_CHANNELS_FLAG = new long[] {
@@ -66,6 +72,20 @@ public abstract class Constants {
 	public static final long[] PRESTON_CHANNELS = new long[] {
 			CUTE_PICS_CHANNEL_ID,
 			BOT_CHANNEL_ID
+	};
+
+	public static final long[] MINIGAME_CHANNELS = new long[] {
+		GENERAL_CHANNEL_ID,
+		NSFW_GENERAL_CHANNEL_ID,
+		MEMES_CHANNEL_ID,
+		NSFW_MEMES_CHANNEL_ID,
+		HAPPY_BOI_CHANNEL_ID,
+		RECOMMENDATIONS_CHANNEL_ID,
+		CUTE_PICS_CHANNEL_ID,
+		GAMING_CHANNEL_ID,
+		BOT_CHANNEL_ID,
+		VC_TEXT_CHANNEL_ID,
+		BOT_TEAM_CHANNEL_ID
 	};
 
 	public static final long WAFFLE_USER_ID = 180854214308790272l;

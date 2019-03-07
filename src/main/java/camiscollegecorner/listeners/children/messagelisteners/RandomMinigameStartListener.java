@@ -1,11 +1,14 @@
 package camiscollegecorner.listeners.children.messagelisteners;
 
+import camiscollegecorner.Constants;
 import camiscollegecorner.listeners.MessageListener;
 import camiscollegecorner.minigames.Anagram;
 import camiscollegecorner.minigames.PicPick;
 import sx.blah.discord.api.events.Event;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
+import sx.blah.discord.handle.obj.IChannel;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class RandomMinigameStartListener extends MessageListener {
@@ -32,6 +35,13 @@ public class RandomMinigameStartListener extends MessageListener {
 			//the active minigame should handle all message events while it is active
 			currentMinigame.handleMessage(messageEvent);
 		} else {
+			IChannel sourceChannel = messageEvent.getChannel();
+
+			if(!Arrays.asList(Constants.MINIGAME_CHANNELS).contains(sourceChannel.getLongID())) {
+				//minigames should only be auto triggered in the channels dictated by [Constants.MINIGAME_CHANNELS]
+				return;
+			}
+
 			if(random.nextInt(10001) <= MINIGAME_START_CHANCE) {
 				//randomly pick a minigame
 				int randNum = random.nextInt(2);
