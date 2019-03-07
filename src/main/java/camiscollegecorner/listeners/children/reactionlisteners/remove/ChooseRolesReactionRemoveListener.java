@@ -21,7 +21,7 @@ public class ChooseRolesReactionRemoveListener extends ReactionRemoveListener {
 	@Override
 	public void handleEvent(Event event) {
 		ReactionRemoveEvent reactionRemoveEvent = (ReactionRemoveEvent) event;
-		
+
 		if(reactionRemoveEvent.getMessageID() == Constants.CHOOSE_ROLES_MESSAGE_ID) {
 			//we are dealing with choose roles message
 			IUser reactor = reactionRemoveEvent.getUser();
