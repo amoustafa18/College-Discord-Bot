@@ -1,0 +1,227 @@
+package camiscollegecorner.minigames;
+
+import camiscollegecorner.Constants;
+import camiscollegecorner.commandhandlers.CmdHandler;
+import camiscollegecorner.commandhandlers.SingleThreadedAbstractHandler;
+import camiscollegecorner.hangman.HangmanClient;
+import camiscollegecorner.hangman.HangmanClientImpl;
+import camiscollegecorner.listeners.MessageListener;
+import sx.blah.discord.api.internal.json.objects.EmbedObject;
+import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
+import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IMessage;
+import sx.blah.discord.handle.obj.IUser;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Hangman extends AbstractMinigame {
+
+	/** A List containing all users who placed a guess in the hangman game. */
+	private Set<IUser> participants;
+
+	/** The CmdHandler bound to this minigame. */
+	private Hangman.HangmanCmdHandler hangmanCmdHandler;
+
+	/** The backend client of this minigame. */
+	private HangmanClient hangmanClient;
+
+	/** The description to use for the embed objects sent by this minigame. */
+	private static final String HANGMAN_DESCRIPTION = "Guess the word";
+
+	/** The color to use for the embed objects sent by this minigame. */
+	private static final int HANGMAN_EMBED_COLOR = 0xe88914;
+
+	/** An EmbedFieldObject storing information about the picpick game. */
+	private static final EmbedObject.EmbedFieldObject HANGMAN_EMBED_FIELD = new EmbedObject.EmbedFieldObject();
+
+	/** An EmbedFieldObject storing information about the secret phrase. */
+	private static final EmbedObject.EmbedFieldObject HANGMAN_PHRASE_FIELD = new EmbedObject.EmbedFieldObject();
+
+	/** The embed containing all of the game's information. */
+	private static EmbedObject GAME_EMBED = new EmbedObject();
+
+	/**
+	 * Construct a hangman minigame. In this minigame, a phrase is randomly chosen and hidden from the client. The
+	 * client must guess all of the letters in the phrase before exhausting all of its guesses.
+	 * @param sourceChannel The channel this minigame was sourced from.
+	 * @param sourceUser The user this minigame was started by. Null if this was automatically started.
+	 * @param automaticallyStarted Whether or not this minigame was randomly started.
+	 */
+	public Hangman(IChannel sourceChannel, IUser sourceUser, boolean automaticallyStarted) {
+		super(sourceChannel, sourceUser, automaticallyStarted);
+
+		participants = new HashSet<>();
+		hangmanClient = new HangmanClientImpl();
+
+		HANGMAN_EMBED_FIELD.inline = false;
+		HANGMAN_EMBED_FIELD.name = "Hangman!";
+		HANGMAN_EMBED_FIELD.value = "In this minigame, you must guess the letters of a random phrase. " +
+				" Place your guess using " +	Constants.CMD_PREFIX + CmdHandler.CMD_GUESS +
+				" [character you are guessing]. Good luck!";
+
+		HANGMAN_PHRASE_FIELD.inline = false;
+		HANGMAN_PHRASE_FIELD.name = "Phrase";
+		HANGMAN_PHRASE_FIELD.value = hangmanClient.getSecretPhraseAsDisplayed();
+	}
+
+	@Override
+	public void handleMessage(MessageReceivedEvent mre) {
+		IMessage message = mre.getMessage();
+
+		hangmanCmdHandler = new Hangman.HangmanCmdHandler(message);
+		hangmanCmdHandler.handle();
+	}
+
+	/** Introduce the minigame. */
+	@Override
+	public void startGame() {
+		IChannel channel = getSourceChannel();
+
+		EmbedObject embed = new EmbedObject();
+		embed.title = AbstractMinigame.EMBED_OBJECT_TITLE;
+		embed.description = HANGMAN_DESCRIPTION;
+
+		embed.color = HANGMAN_EMBED_COLOR;
+
+		EmbedObject.EmbedFieldObject[] fields = new EmbedObject.EmbedFieldObject[2];
+
+		fields[0] = HANGMAN_EMBED_FIELD;
+		fields[1] = HANGMAN_PHRASE_FIELD;
+
+		embed.fields = fields;
+
+		embed.footer = generateFooter();
+
+		channel.sendMessage(embed);
+
+		GAME_EMBED = embed;
+	}
+
+	private void updateGame() {
+		getSourceChannel().sendMessage(GAME_EMBED);
+	}
+
+	@Override
+	public void endGame() {
+		EmbedObject finalEmbed = GAME_EMBED;
+
+		EmbedObject.EmbedFieldObject[] fields = new EmbedObject.EmbedFieldObject[3];
+		EmbedObject.EmbedFieldObject winnersField = new EmbedObject.EmbedFieldObject();
+
+		if(hangmanClient.getCurrentHealth() < hangmanClient.getMaxHealth()) {
+			//the client has won the game
+			winnersField.name = "Winners";
+			winnersField.value = userSetToString(participants);
+		} else {
+			//the client lost the game
+			winnersField.name = "You lose";
+			winnersField.value = "You were unable to save the hanging man. :sad:";
+		}
+
+		fields[0] = finalEmbed.fields[0];
+		fields[1] = finalEmbed.fields[1];
+		fields[2] = winnersField;
+
+		finalEmbed.fields = fields;
+
+		getSourceChannel().sendMessage(finalEmbed);
+		MessageListener.currentMinigame = null;
+	}
+
+	/**
+	 * Converts {@code set} to a string by separating each of its elements by a comma.
+	 * */
+	private String userSetToString(Set<IUser> set) {
+		StringBuilder sb = new StringBuilder();
+		IUser[] setAsArr = (IUser[]) set.toArray();
+
+		for(int i = 0; i < set.size(); i++) {
+			if(i == set.size() - 1) {
+				sb.append(setAsArr[i].getName());
+			} else {
+				sb.append(setAsArr[i].getName() + ", ");
+			}
+		}
+
+		return sb.toString();
+	}
+
+	private class HangmanCmdHandler extends CmdHandler {
+		public HangmanCmdHandler(IMessage message) {
+			super(message);
+		}
+
+		@Override
+		public void handle() {
+			String content = getMessage().getContent().toLowerCase();
+
+			if(content.startsWith(Constants.CMD_PREFIX)) {
+				//remove the command prefix:
+				content = content.substring(Constants.CMD_PREFIX.length());
+
+				if(content.startsWith(CmdHandler.CMD_GUESS)) {
+					//guess command PREFIXCMD [username of guess]
+					Hangman.GuessHandler h = new Hangman.GuessHandler(getMessage());
+					h.run();
+				}
+			}
+		}
+	}
+
+	private class GuessHandler extends SingleThreadedAbstractHandler {
+		public GuessHandler(IMessage message) {
+			super(message);
+		}
+
+		@Override
+		public void run() {
+			String[] cmdAsArray = getMessage().getContent().split(" ");
+
+			//TODO override onCommandUsedIncorrectly()
+			if(cmdAsArray.length != 2) {
+				onCommandUsedIncorrectly();
+				return;
+			}
+
+			String guess = cmdAsArray[1];
+
+			if(guess.length() != 1) {
+				onCommandUsedIncorrectly();
+				return;
+			}
+
+			int currentHealth = hangmanClient.getCurrentHealth();
+
+			hangmanClient.guess(guess.charAt(0));
+
+			if(hangmanClient.getCurrentHealth() > currentHealth) {
+				//incorrect guess
+				getMessage().addReaction(Constants.RED_X_EMOJI);
+				//TODO update thumbnail image
+				//TODO update guesses remaining field
+				//TODO append guess to guesses made field
+
+				if(hangmanClient.getCurrentHealth() == hangmanClient.getMaxHealth()) {
+					//client is dead
+					endGame();
+					return;
+				}
+
+				updateGame();
+			} else {
+				//correct guess
+				getMessage().addReaction(Constants.WHITE_CHECK_EMOJI);
+				GAME_EMBED.fields[1].value = hangmanClient.getSecretPhraseAsDisplayed();
+
+				if(!hangmanClient.getSecretPhraseAsDisplayed().contains("_")) {
+					//game is over
+					endGame();
+					return;
+				}
+
+				updateGame();
+			}
+		}
+	}
+}
