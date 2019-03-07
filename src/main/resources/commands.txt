@@ -1,7 +1,10 @@
 devBot command help
 ```
-help - To get this message
-ping - To see if the bot is online with ping time
-cat - Get a cute cat that we stole off reddit
-anagram - Starts a new anagram minigame, currently in progress
+[-] cat - Get a cute cat picture that we stole from Reddit.
+
+[-] help <command> - To get this message. Enter a command name for <command> to get more detailed help with that particular command.
+
+[-] ping - Receive the bot latency.
+
+[-] preston - Get a cute picture of Preston the cat.
 ```
